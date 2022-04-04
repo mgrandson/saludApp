@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Salud App</string>
+    <string name="main_btn_text_ingresar">Ingresar</string>
+    <string name="main_text_bienvenido">Bienvenido</string>
+    <string name="main_edit_hint_usuario">Usuario</string>
+    <string name="main_edit_hint_contrasenia">Contraseña</string>
+    <string name="main_text_crear_cuenta">Crear cuenta</string>
+    <string name="main_text_recordar_usuario">Recordar Usuario</string>
+</resources>
+
+
