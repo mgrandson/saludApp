@@ -21,7 +21,8 @@ public class SaludSqliteHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int versionAntigua, int versionNueva) {
-    //actualiza las tablas de  la base de datos
+    public void onUpgrade(SQLiteDatabase baseDatos, int versionAntigua, int versionNueva) {
+    baseDatos.execSQL(SaludDB.UsuarioDB.ELIMINAR_TABLA);
+    baseDatos.execSQL(SaludDB.UsuarioDB.CREAR_TABLA);
     }
 }

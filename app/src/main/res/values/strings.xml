@@ -1,11 +1,28 @@
 <resources>
-    <string name="app_name">Salud App</string>
+    <string name="app_name">Salud app</string>
     <string name="main_btn_text_ingresar">Ingresar</string>
     <string name="main_text_bienvenido">Bienvenido</string>
     <string name="main_edit_hint_usuario">Usuario</string>
     <string name="main_edit_hint_contrasenia">Contraseña</string>
     <string name="main_text_crear_cuenta">Crear cuenta</string>
     <string name="main_text_recordar_usuario">Recordar Usuario</string>
+    <string name="conten_agregar_usuario">Agregar usuario</string>
+    <string name="txt_repetir_contrase_a">Repetir contraseña</string>
+    <string name="nombre">nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="genero">Genero</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="crear">Crear</string>
+    <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
+    <string name="salud_app">Salud App</string>
+    <string name="chequeo_medic">Chequeo medicó</string>
+    <string name="chequeo">Chequeo</string>
+    <string name="dieta">Dieta</string>
+
+    <string-array name="Genero">
+        <item>Femenino</item>
+        <item>Masculino</item>
+    </string-array>
 </resources>
 
 
