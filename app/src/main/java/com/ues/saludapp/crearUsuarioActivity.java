@@ -94,6 +94,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 // Le pasamos lo que haya en las globales
                 DatePickerDialog dialogoFecha = new DatePickerDialog(crearUsuarioActivity.this, listenerDeDatePicker, ultimoAnio, ultimoMes, ultimoDiaDelMes);
                 //Mostrar
+
                 dialogoFecha.show();
             }
         });
@@ -155,7 +156,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 else {
                     //aca deberiamos llevar al usaurio al menu principal
                     Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(),Menu.class);
+                    Intent intent = new Intent(getApplicationContext(),navegacion.class);
                     startActivity(intent);
                 }
 
@@ -165,7 +166,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 Toast.makeText(this,"El usuario: " + bUsuario.getNombreUsuario() + " ya existe, favor intentar con otro nombre de usuario.", Toast.LENGTH_LONG).show();
             }
 
-            long msg = controladorUsuario.crearUsuario(usuario);
+            //long msg = controladorUsuario.crearUsuario(usuario);
             /**if(msg !=-1 || msg !=0  )
             {
                 Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();

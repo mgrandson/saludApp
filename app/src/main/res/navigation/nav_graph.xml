@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuInicio">
+
+    <fragment
+        android:id="@+id/menuInicio"
+        android:name="com.ues.saludapp.menuInicio"
+        android:label="fragment_menu_inicio"
+        tools:layout="@layout/fragment_menu_inicio" >
+        <action
+            android:id="@+id/action_menuInicio_to_chekeoMedico"
+            app:destination="@id/chekeoMedico"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_menuInicio_to_dieta"
+            app:destination="@id/dieta"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_menuInicio_to_ejercicio"
+            app:destination="@id/ejercicio"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/chekeoMedico"
+        android:name="com.ues.saludapp.chekeoMedico"
+        android:label="fragment_chekeo_medico"
+        tools:layout="@layout/fragment_chekeo_medico" />
+    <fragment
+        android:id="@+id/dieta"
+        android:name="com.ues.saludapp.dieta"
+        android:label="fragment_dieta"
+        tools:layout="@layout/fragment_dieta" />
+    <fragment
+        android:id="@+id/ejercicio"
+        android:name="com.ues.saludapp.ejercicio"
+        android:label="fragment_ejercicio"
+        tools:layout="@layout/fragment_ejercicio" />
+</navigation>
