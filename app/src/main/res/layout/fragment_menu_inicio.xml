@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
 
-        android:text="Rutina de ejercicio"
+        android:text="@string/rutina_de_ejercicio"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -52,14 +52,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu" />
 
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="131dp"
         android:text="@string/salud_app"
         android:textColor="@color/white"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="70dp"
-        android:text="Dieta"
+        android:text="@string/dieta"
         android:textColor="@color/colorPrimary"
 
         android:textSize="20sp"
@@ -123,8 +124,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/rutina"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ejercicio" />
+
+    <TextView
+        android:id="@+id/txtSalir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:text="Salir"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRutinaEjercicio" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

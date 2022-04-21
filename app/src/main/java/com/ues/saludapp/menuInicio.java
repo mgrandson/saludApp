@@ -1,5 +1,7 @@
 package com.ues.saludapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ public class menuInicio extends Fragment {
     TextView txtChequeoMedico;
     TextView txtDieta;
     TextView txtRutinaEjercicio;
+    TextView txtNombreUsuario;
 
 
 
@@ -45,6 +48,9 @@ public class menuInicio extends Fragment {
         txtChequeoMedico = view.findViewById(R.id.txtChequeoMedico);
         txtDieta = view.findViewById(R.id.txtDieta);
         txtRutinaEjercicio = view.findViewById(R.id.txtRutinaEjercicio);
+        txtNombreUsuario = view.findViewById(R.id.txtUsuario);
+        SharedPreferences datosLogin = getContext().getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+        txtNombreUsuario.setText("¡Bienvenido! " + datosLogin.getString("nombreUsuario",""));
 
         txtChequeoMedico.setOnClickListener(new View.OnClickListener() {
             @Override

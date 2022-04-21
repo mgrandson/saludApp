@@ -7,6 +7,7 @@ import control.SaludDB;
 public class Usuario {
 
     private String nombreUsuario;
+    private String contrasenia;
     private String nombre;
     private String apellido;
     private String fechaNacimiento;
@@ -24,6 +25,14 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombre() {
@@ -66,11 +75,12 @@ public class Usuario {
     public ContentValues toContentvalues(){
         ContentValues usuarioValues = new ContentValues();
         usuarioValues.put(SaludDB.UsuarioDB.NOMBRE_USUARIO, nombreUsuario);
+        usuarioValues.put(SaludDB.UsuarioDB.CONTRASENIA,contrasenia);
         usuarioValues.put(SaludDB.UsuarioDB.NOMBRE,nombre);
         usuarioValues.put(SaludDB.UsuarioDB.APELLIDO,apellido);
         usuarioValues.put(SaludDB.UsuarioDB.FECHA_NACIMIENTO,fechaNacimiento);
         usuarioValues.put(SaludDB.UsuarioDB.GENERO,genero);
-
         return usuarioValues;
     }
+
 }

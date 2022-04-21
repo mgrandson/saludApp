@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -75,7 +77,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
         newApellido = findViewById(R.id.editNewApellido);
         newFecha = findViewById(R.id.editNewFecha);
         spinnerGenero = findViewById(R.id.spinner);
-        btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
+        btnCrearUsuario = findViewById(R.id.btnLogin);
         String[] generos = {"SELECCION GENERO","FEMENINO","MASCULINO"};
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_genero,generos);
         spinnerGenero.setAdapter(arrayAdapter);
@@ -141,6 +143,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
         else{
             usuario = new Usuario();
             usuario.setNombreUsuario(newNombreUsuario.getText().toString());
+            usuario.setContrasenia(newContrasenia.getText().toString());
             usuario.setNombre(newNombre.getText().toString());
             usuario.setApellido(newApellido.getText().toString());
             usuario.setGenero(spinnerGenero.getSelectedItem().toString());
@@ -156,8 +159,14 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 else {
                     //aca deberiamos llevar al usaurio al menu principal
                     Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();
+                    SharedPreferences datosLogin = getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = datosLogin.edit();
+                    //El nombre de usuario siempre se guarda para mostrarlo en la app, se debe eliminar cuando el usuario cierre sesion.
+                    editor.putString("nombreUsuario", usuario.getNombreUsuario());
+                    editor.commit();
                     Intent intent = new Intent(getApplicationContext(),navegacion.class);
                     startActivity(intent);
+                    limpiarCampos();
                 }
 
             }
@@ -234,7 +243,18 @@ public class crearUsuarioActivity extends AppCompatActivity {
 
 
 
+    public void limpiarCampos(){
 
+        newNombreUsuario.setText(null);
+        newContrasenia .setText(null);
+        newRepetirContrasenia.setText(null);
+        newNombre.setText(null);
+        newApellido .setText(null);
+        newFecha .setText(null);
+        spinnerGenero.setSelection(0);
+        newNombreUsuario.requestFocus();
+
+    }
 
 
 

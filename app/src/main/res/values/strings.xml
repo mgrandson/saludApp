@@ -25,6 +25,10 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rutina_de_ejercicio">Rutina de ejercicio</string>
+
+    <string name="usuario_marcos">Usuario: Marcos</string>
+    <string name="rutina">rutina</string>
 </resources>
 
 
