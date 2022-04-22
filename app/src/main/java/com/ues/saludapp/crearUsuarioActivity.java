@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,6 +36,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
     Button btnCrearUsuario;
     Usuario usuario;
     ControladorUsuario controladorUsuario;
+    CheckBox checkRecordarUsuario1;
 
     // Guardar el último año, mes y día del mes
     private int ultimoAnio, ultimoMes, ultimoDiaDelMes;
@@ -77,7 +79,8 @@ public class crearUsuarioActivity extends AppCompatActivity {
         newApellido = findViewById(R.id.editNewApellido);
         newFecha = findViewById(R.id.editNewFecha);
         spinnerGenero = findViewById(R.id.spinner);
-        btnCrearUsuario = findViewById(R.id.btnLogin);
+        btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
+        checkRecordarUsuario1 = findViewById(R.id.checkRecordarUsuario1);
         String[] generos = {"SELECCION GENERO","FEMENINO","MASCULINO"};
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_genero,generos);
         spinnerGenero.setAdapter(arrayAdapter);
@@ -159,11 +162,21 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 else {
                     //aca deberiamos llevar al usaurio al menu principal
                     Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();
+                    //guardando datos de usuario en  SharedPreferences para mostrarlos cuando abra la app de nuevo
                     SharedPreferences datosLogin = getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = datosLogin.edit();
                     //El nombre de usuario siempre se guarda para mostrarlo en la app, se debe eliminar cuando el usuario cierre sesion.
                     editor.putString("nombreUsuario", usuario.getNombreUsuario());
-                    editor.commit();
+                    if(checkRecordarUsuario1.isChecked()) {
+                        editor.putString("contrasenia", usuario.getContrasenia());
+                        editor.putBoolean("recordar",true);
+                        editor.commit();
+                    }
+                    else {
+                        editor.putString("contrasenia", "");
+                        editor.putBoolean("recordar",false);
+                        editor.commit();
+                    }
                     Intent intent = new Intent(getApplicationContext(),navegacion.class);
                     startActivity(intent);
                     limpiarCampos();

@@ -178,7 +178,7 @@
         android:drawableStart="@drawable/ic_date"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:focusable="false"
+        android:focusable="true"
         android:hint="@string/fecha_de_nacimiento"
         android:inputType="none"
         android:minHeight="48dp"
@@ -192,7 +192,7 @@
 
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnCrearUsuario"
         android:layout_width="160dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
@@ -210,18 +210,22 @@
 
     <Button
         android:id="@+id/btnCancelar"
-        style="@style/Widget.AppCompat.Button.Borderless"
+
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="64dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/btn_redondo"
         android:text="@string/cancelar"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
+
         android:textStyle="bold"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNewFecha"
+        app:strokeColor="@color/colorPrimary"
+
         tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
     <CheckBox
