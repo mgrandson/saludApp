@@ -10,7 +10,7 @@
     <View
         android:id="@+id/topView"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -19,38 +19,55 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/chequeo"
         app:layout_constraintEnd_toEndOf="@+id/topView"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topView"
         app:srcCompat="@drawable/chequeo"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/chequeo_medic"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/chequeos_m_dicos"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Button"
+    <ListView
+        android:id="@+id/listviewChequeoMedicos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topView" />
+        app:layout_constraintTop_toBottomOf="@+id/topView" >
+
+
+    </ListView>
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/agregar_chequeo"
+        android:src="@drawable/addcircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

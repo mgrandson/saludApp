@@ -30,7 +30,13 @@
         android:id="@+id/chekeoMedico"
         android:name="com.ues.saludapp.chekeoMedico"
         android:label="fragment_chekeo_medico"
-        tools:layout="@layout/fragment_chekeo_medico" />
+        tools:layout="@layout/fragment_chekeo_medico" >
+        <action
+            android:id="@+id/action_chekeoMedico_to_listaChekeoMedico"
+            app:destination="@id/listaChekeoMedico"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/dieta"
         android:name="com.ues.saludapp.dieta"
@@ -41,4 +47,9 @@
         android:name="com.ues.saludapp.ejercicio"
         android:label="fragment_ejercicio"
         tools:layout="@layout/fragment_ejercicio" />
+    <fragment
+        android:id="@+id/listaChekeoMedico"
+        android:name="com.ues.saludapp.listaChekeoMedico"
+        android:label="fragment_lista_chekeo_medico"
+        tools:layout="@layout/fragment_lista_chekeo_medico" />
 </navigation>

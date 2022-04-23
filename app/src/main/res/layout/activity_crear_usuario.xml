@@ -178,7 +178,7 @@
         android:drawableStart="@drawable/ic_date"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:focusable="true"
+        android:focusable="false"
         android:hint="@string/fecha_de_nacimiento"
         android:inputType="none"
         android:minHeight="48dp"

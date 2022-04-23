@@ -8,7 +8,7 @@
     <string name="main_text_recordar_usuario">Recordar Usuario</string>
     <string name="conten_agregar_usuario">Agregar usuario</string>
     <string name="txt_repetir_contrase_a">Repetir contraseña</string>
-    <string name="nombre">nombre</string>
+    <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
     <string name="genero">Genero</string>
     <string name="cancelar">Cancelar</string>
@@ -29,6 +29,9 @@
 
     <string name="usuario_marcos">Usuario: Marcos</string>
     <string name="rutina">rutina</string>
+
+    <string name="chequeos_m_dicos">Chequeos médicos</string>
+    <string name="agregar_chequeo">Agregar Chequeo</string>
 </resources>
 
 
