@@ -32,6 +32,7 @@
 
     <string name="chequeos_m_dicos">Chequeos médicos</string>
     <string name="agregar_chequeo">Agregar Chequeo</string>
+    <string name="editar_chequeo_m_dico">Editar chequeo médico</string>
 </resources>
 
 

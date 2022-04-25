@@ -11,11 +11,6 @@
         android:label="fragment_menu_inicio"
         tools:layout="@layout/fragment_menu_inicio" >
         <action
-            android:id="@+id/action_menuInicio_to_chekeoMedico"
-            app:destination="@id/chekeoMedico"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
             android:id="@+id/action_menuInicio_to_dieta"
             app:destination="@id/dieta"
             app:enterAnim="@android:anim/fade_in"
@@ -25,14 +20,8 @@
             app:destination="@id/ejercicio"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/chekeoMedico"
-        android:name="com.ues.saludapp.chekeoMedico"
-        android:label="fragment_chekeo_medico"
-        tools:layout="@layout/fragment_chekeo_medico" >
         <action
-            android:id="@+id/action_chekeoMedico_to_listaChekeoMedico"
+            android:id="@+id/action_menuInicio_to_listaChekeoMedico"
             app:destination="@id/listaChekeoMedico"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
@@ -51,5 +40,14 @@
         android:id="@+id/listaChekeoMedico"
         android:name="com.ues.saludapp.listaChekeoMedico"
         android:label="fragment_lista_chekeo_medico"
-        tools:layout="@layout/fragment_lista_chekeo_medico" />
+        tools:layout="@layout/fragment_lista_chekeo_medico" >
+        <action
+            android:id="@+id/action_listaChekeoMedico_to_editarChequeoMedico"
+            app:destination="@id/editarChequeoMedico" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarChequeoMedico"
+        android:name="com.ues.saludapp.editarChequeoMedico"
+        android:label="fragment_editar_chequeo_medico"
+        tools:layout="@layout/fragment_editar_chequeo_medico" />
 </navigation>

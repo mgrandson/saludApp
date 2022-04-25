@@ -1,12 +1,17 @@
 package com.ues.saludapp;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.navigation.Navigation;
 
 import java.util.ArrayList;
 
@@ -47,6 +52,17 @@ public class adaptadorListaChequedosMedicos extends BaseAdapter {
         TextView textViewFechaChequeo = itemView.findViewById(R.id.txtFechaChequeo);
         textViewFechaChequeo.setText(chequeos.get(i).getFecha());
         textViewPeso.setText(  String.valueOf(chequeos.get(i).getPeso()) + " Kg.");
+
+        ImageView imageViewEdit = itemView.findViewById(R.id.imgEdit);
+
+        imageViewEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("idChequeo",chequeos.get(i).getFecha().toString());
+                Navigation.findNavController(view).navigate(R.id.action_listaChekeoMedico_to_editarChequeoMedico,bundle);
+            }
+        });
 
         return itemView;
     }

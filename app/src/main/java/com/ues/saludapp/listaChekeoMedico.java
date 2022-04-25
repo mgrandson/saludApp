@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -80,5 +82,8 @@ public class listaChekeoMedico extends Fragment {
         }
         adaptadorListaChequedosMedicos adaptadorListaChequedosMedicos = new adaptadorListaChequedosMedicos(getContext(),chequeos);
         listaChequeosMedicos.setAdapter(adaptadorListaChequedosMedicos);
+
+
+
     }
 }
