@@ -196,7 +196,7 @@
         android:layout_width="160dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/btn_redondo"
         android:text="@string/crear"
         android:textColor="@color/white"
@@ -210,18 +210,35 @@
 
     <Button
         android:id="@+id/btnCancelar"
-        style="@style/Widget.AppCompat.Button.Borderless"
+
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="160dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/btn_redondo"
         android:text="@string/cancelar"
-        android:textColor="@color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
+
         android:textStyle="bold"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNewFecha"
+        app:strokeColor="@color/colorPrimary"
+
         tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+
+    <CheckBox
+        android:id="@+id/checkRecordarUsuario1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/main_text_recordar_usuario"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNewFecha" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

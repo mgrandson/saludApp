@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,6 +36,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
     Button btnCrearUsuario;
     Usuario usuario;
     ControladorUsuario controladorUsuario;
+    CheckBox checkRecordarUsuario1;
 
     // Guardar el último año, mes y día del mes
     private int ultimoAnio, ultimoMes, ultimoDiaDelMes;
@@ -76,6 +80,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
         newFecha = findViewById(R.id.editNewFecha);
         spinnerGenero = findViewById(R.id.spinner);
         btnCrearUsuario = findViewById(R.id.btnCrearUsuario);
+        checkRecordarUsuario1 = findViewById(R.id.checkRecordarUsuario1);
         String[] generos = {"SELECCION GENERO","FEMENINO","MASCULINO"};
         ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.item_genero,generos);
         spinnerGenero.setAdapter(arrayAdapter);
@@ -94,6 +99,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 // Le pasamos lo que haya en las globales
                 DatePickerDialog dialogoFecha = new DatePickerDialog(crearUsuarioActivity.this, listenerDeDatePicker, ultimoAnio, ultimoMes, ultimoDiaDelMes);
                 //Mostrar
+
                 dialogoFecha.show();
             }
         });
@@ -140,6 +146,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
         else{
             usuario = new Usuario();
             usuario.setNombreUsuario(newNombreUsuario.getText().toString());
+            usuario.setContrasenia(newContrasenia.getText().toString());
             usuario.setNombre(newNombre.getText().toString());
             usuario.setApellido(newApellido.getText().toString());
             usuario.setGenero(spinnerGenero.getSelectedItem().toString());
@@ -155,8 +162,24 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 else {
                     //aca deberiamos llevar al usaurio al menu principal
                     Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(),Menu.class);
+                    //guardando datos de usuario en  SharedPreferences para mostrarlos cuando abra la app de nuevo
+                    SharedPreferences datosLogin = getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = datosLogin.edit();
+                    //El nombre de usuario siempre se guarda para mostrarlo en la app, se debe eliminar cuando el usuario cierre sesion.
+                    editor.putString("nombreUsuario", usuario.getNombreUsuario());
+                    if(checkRecordarUsuario1.isChecked()) {
+                        editor.putString("contrasenia", usuario.getContrasenia());
+                        editor.putBoolean("recordar",true);
+                        editor.commit();
+                    }
+                    else {
+                        editor.putString("contrasenia", "");
+                        editor.putBoolean("recordar",false);
+                        editor.commit();
+                    }
+                    Intent intent = new Intent(getApplicationContext(),navegacion.class);
                     startActivity(intent);
+                    limpiarCampos();
                 }
 
             }
@@ -165,7 +188,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                 Toast.makeText(this,"El usuario: " + bUsuario.getNombreUsuario() + " ya existe, favor intentar con otro nombre de usuario.", Toast.LENGTH_LONG).show();
             }
 
-            long msg = controladorUsuario.crearUsuario(usuario);
+            //long msg = controladorUsuario.crearUsuario(usuario);
             /**if(msg !=-1 || msg !=0  )
             {
                 Toast.makeText(this,"Usuario registrado.", Toast.LENGTH_LONG).show();
@@ -233,7 +256,18 @@ public class crearUsuarioActivity extends AppCompatActivity {
 
 
 
+    public void limpiarCampos(){
 
+        newNombreUsuario.setText(null);
+        newContrasenia .setText(null);
+        newRepetirContrasenia.setText(null);
+        newNombre.setText(null);
+        newApellido .setText(null);
+        newFecha .setText(null);
+        spinnerGenero.setSelection(0);
+        newNombreUsuario.requestFocus();
+
+    }
 
 
 

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaludApp">
         <activity
-            android:name=".Menu"
+            android:name=".navegacion"
             android:exported="false" />
         <activity
             android:name=".crearUsuarioActivity"

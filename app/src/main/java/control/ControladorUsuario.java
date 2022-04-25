@@ -13,7 +13,7 @@ public class ControladorUsuario {
     private Context context;
     private String informacion;
 
-    private static final String[] camposUsuario = new String [] {SaludDB.UsuarioDB.NOMBRE_USUARIO,SaludDB.UsuarioDB.NOMBRE,SaludDB.UsuarioDB.APELLIDO,SaludDB.UsuarioDB.FECHA_NACIMIENTO,SaludDB.UsuarioDB.GENERO};
+    private static final String[] camposUsuario = new String [] {SaludDB.UsuarioDB.NOMBRE_USUARIO,SaludDB.UsuarioDB.CONTRASENIA,SaludDB.UsuarioDB.NOMBRE,SaludDB.UsuarioDB.APELLIDO,SaludDB.UsuarioDB.FECHA_NACIMIENTO,SaludDB.UsuarioDB.GENERO};
 
     public ControladorUsuario(Context context) {
         this.context = context;
@@ -54,10 +54,11 @@ public class ControladorUsuario {
         if(cursor.moveToFirst()){
             Usuario usuario = new Usuario();
             usuario.setNombreUsuario(cursor.getString(0));
-            usuario.setNombre(cursor.getString(1));
-            usuario.setApellido(cursor.getString(2));
-            usuario.setFechaNacimiento(cursor.getString(3));
-            usuario.setGenero(cursor.getString(4));
+            usuario.setContrasenia(cursor.getString(1));
+            usuario.setNombre(cursor.getString(2));
+            usuario.setApellido(cursor.getString(3));
+            usuario.setFechaNacimiento(cursor.getString(4));
+            usuario.setGenero(cursor.getString(5));
             cerrarDB();
             return usuario;
 
@@ -67,6 +68,37 @@ public class ControladorUsuario {
 
     }
 
+
+    /**
+     * valida que el usuario y contraseña coincidan para hacer login
+     * @return
+     */
+    public boolean validarLogin(String nombreUsuario,String contrasenia){
+        informacion = "";
+        Usuario usuario = buscarUsuario(nombreUsuario);
+        if(usuario == null){
+            informacion ="Usuario no existe.";
+            return false;
+        }
+        else if(!usuario.getContrasenia().equals(contrasenia)) {
+            informacion = "Contraseña incorrecta";
+        }
+        else{
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+    public String getInformacion() {
+        return informacion;
+    }
+
+    public void setInformacion(String informacion) {
+        this.informacion = informacion;
+    }
 
     public Context getContext() {
         return context;
