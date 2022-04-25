@@ -23,7 +23,7 @@ public class chekeoMedico extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chekeo_medico, container, false);
+        return inflater.inflate(R.layout.fragment_lista_chekeo_medico, container, false);
     }
 
 
@@ -32,11 +32,11 @@ public class chekeoMedico extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bnt = view.findViewById(R.id.btnTest);
+        ////bnt = view.findViewById(R.id.btnTest);
         bnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_chekeoMedico_to_listaChekeoMedico);
+        ////        Navigation.findNavController(view).navigate(R.id.action_chekeoMedico_to_listaChekeoMedico);
             }
         });
     }
