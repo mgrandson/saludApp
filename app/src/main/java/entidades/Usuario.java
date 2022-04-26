@@ -59,6 +59,7 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    
     public String getGenero() {
         return genero;
     }
