@@ -75,12 +75,12 @@ public class Usuario {
      */
     public ContentValues toContentvalues(){
         ContentValues usuarioValues = new ContentValues();
-        usuarioValues.put(SaludDB.UsuarioDB.NOMBRE_USUARIO, nombreUsuario);
-        usuarioValues.put(SaludDB.UsuarioDB.CONTRASENIA,contrasenia);
-        usuarioValues.put(SaludDB.UsuarioDB.NOMBRE,nombre);
-        usuarioValues.put(SaludDB.UsuarioDB.APELLIDO,apellido);
-        usuarioValues.put(SaludDB.UsuarioDB.FECHA_NACIMIENTO,fechaNacimiento);
-        usuarioValues.put(SaludDB.UsuarioDB.GENERO,genero);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.NOMBRE_USUARIO, nombreUsuario);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.CONTRASENIA,contrasenia);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.NOMBRE,nombre);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.APELLIDO,apellido);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.FECHA_NACIMIENTO,fechaNacimiento);
+        usuarioValues.put(SaludDB.TablaUsuarioDB.GENERO,genero);
         return usuarioValues;
     }
 
