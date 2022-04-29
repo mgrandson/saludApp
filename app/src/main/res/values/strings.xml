@@ -18,6 +18,21 @@
     <string name="chequeo_medic">Chequeo medicó</string>
     <string name="chequeo">Chequeo</string>
     <string name="dieta">Dieta</string>
+    <string name="dieta_layout">Dieta</string>
+
+    <!-- Pantalla Dieta -->
+    <string name="btn_lunes">L</string>
+    <string name="btn_martes">M</string>
+    <string name="btn_miercoles">X</string>
+    <string name="btn_jueves">J</string>
+    <string name="btn_viernes">V</string>
+    <string name="btn_sabado">S</string>
+    <string name="btn_domingo">D</string>
+    <string name="txt_dia_semana">Dia</string>
+    <string name="txt_desayuno">Desayuno</string>
+    <string name="txt_almuerzo">Almuerzo</string>
+    <string name="txt_cena">Cena</string>
+
 
     <string-array name="Genero">
         <item>Femenino</item>
