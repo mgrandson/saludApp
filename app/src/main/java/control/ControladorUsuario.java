@@ -13,7 +13,7 @@ public class ControladorUsuario {
     private Context context;
     private String informacion;
 
-    private static final String[] camposUsuario = new String [] {SaludDB.UsuarioDB.NOMBRE_USUARIO,SaludDB.UsuarioDB.CONTRASENIA,SaludDB.UsuarioDB.NOMBRE,SaludDB.UsuarioDB.APELLIDO,SaludDB.UsuarioDB.FECHA_NACIMIENTO,SaludDB.UsuarioDB.GENERO};
+    private static final String[] camposUsuario = new String [] {SaludDB.TablaUsuarioDB.NOMBRE_USUARIO,SaludDB.TablaUsuarioDB.CONTRASENIA,SaludDB.TablaUsuarioDB.NOMBRE,SaludDB.TablaUsuarioDB.APELLIDO,SaludDB.TablaUsuarioDB.FECHA_NACIMIENTO,SaludDB.TablaUsuarioDB.GENERO};
 
     public ControladorUsuario(Context context) {
         this.context = context;
@@ -39,7 +39,7 @@ public class ControladorUsuario {
      * @return 0 o - 1 error al crear el usuario, valor diferente indica que se registro el usuario;
      */
     public long crearUsuario(Usuario usuario){
-        Long resultado = abrirDB().insert(SaludDB.UsuarioDB.NOMBRE_TABLA,null,usuario.toContentvalues());
+        Long resultado = abrirDB().insert(SaludDB.TablaUsuarioDB.NOMBRE_TABLA,null,usuario.toContentvalues());
         cerrarDB();
         return resultado;
 
@@ -50,7 +50,7 @@ public class ControladorUsuario {
     public Usuario buscarUsuario(String nombreUsuario){
 
         String[] idUsuario = {nombreUsuario};
-        Cursor cursor = abrirDB().query(SaludDB.UsuarioDB.NOMBRE_TABLA,camposUsuario,"nombreUsuario = ?",idUsuario,null,null,null);
+        Cursor cursor = abrirDB().query(SaludDB.TablaUsuarioDB.NOMBRE_TABLA,camposUsuario,"nombreUsuario = ?",idUsuario,null,null,null);
         if(cursor.moveToFirst()){
             Usuario usuario = new Usuario();
             usuario.setNombreUsuario(cursor.getString(0));
