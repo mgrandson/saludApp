@@ -41,7 +41,7 @@ public class ControladorRegistroRitmoCardiaco {
      */
     public RegistroRitmoCardiaco buscarPorIdChequeoSalud(Integer idChqueoSalud){
 
-       // String[] idChequeoSalud = {  String.valueOf(idChqueoSalud)};
+
         Cursor cursor = abrirDB().query(SaludDB.TablaRegistroRitmoCardiaco.NOMBRE_TABLA,camposRegistroRitmoCardiaco,"chequeoSaludId =" + idChqueoSalud,null,null,null,null);
         if(cursor.moveToFirst()){
             RegistroRitmoCardiaco registroRitmoCardiaco = new RegistroRitmoCardiaco();

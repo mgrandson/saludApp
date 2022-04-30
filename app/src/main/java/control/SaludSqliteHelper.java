@@ -37,7 +37,41 @@ public class SaludSqliteHelper extends SQLiteOpenHelper {
         baseDatos.execSQL(SaludDB.TablaRegistroActividadFisicaDiaria.CREAR_TABLA);
 
 
+        baseDatos.execSQL("INSERT INTO rangos_altura ( alturaMinima, alturaMaxima) VALUES ( '161.0', '163.0');");
+        baseDatos.execSQL("INSERT INTO rangos_altura ( alturaMinima, alturaMaxima) VALUES ( '164.0', '168.0');");
+        baseDatos.execSQL("INSERT INTO rangos_altura ( alturaMinima, alturaMaxima) VALUES ( '169.0', '170.0');");
 
+        baseDatos.execSQL("INSERT INTO rangos_peso ( pesoMinima, pesoMaxima) VALUES ( '161.0', '171.0');");
+        baseDatos.execSQL("INSERT INTO rangos_peso ( pesoMinima, pesoMaxima) VALUES ( '172.0', '175.0');");
+        baseDatos.execSQL("INSERT INTO rangos_peso ( pesoMinima, pesoMaxima) VALUES ( '181.0', '191.0');");
+
+        baseDatos.execSQL("INSERT INTO rangos_imc (sexoImc, rangoAlturaId, rangoPesoId) VALUES ( 'MASCULINO', '1', '1');");
+        baseDatos.execSQL("INSERT INTO rangos_imc (sexoImc, rangoAlturaId, rangoPesoId) VALUES ( 'MASCULINO', '2', '2');");
+        baseDatos.execSQL("INSERT INTO rangos_imc (sexoImc, rangoAlturaId, rangoPesoId) VALUES ( 'MASCULINO', '3', '3');");
+
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2022-01-28', '150.0', '165.0', '0.25', '0.22', '1', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2022-02-21', '150.0', '165.0', '0.25', '0.22', '2', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2021-01-24', '150.0', '165.0', '0.25', '0.22', '3', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2021-01-23', '150.0', '165.0', '0.25', '0.22', '3', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2019-08-12', '150.0', '165.0', '0.25', '0.22', '1', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2019-05-15', '150.0', '165.0', '0.25', '0.22', '2', '1');");
+        baseDatos.execSQL("INSERT INTO chequeos_salud (fechaChequeo, pesoActual, alturaActual, valorImcActual, mensajeImcActual, rangosImcId, usuariosId) VALUES ('2022-04-27', '150.0', '165.0', '0.25', '0.22', '2', '1');");
+
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '160', '1');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '125', '2');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '80', '3');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '85', '4');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '91', '5');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '106', '6');");
+        baseDatos.execSQL("INSERT INTO registros_ritmo_cardiaco (bpm, chequeoSaludId) VALUES ( '91', '7');");
+
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('80', '110', '1');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('90', '130', '2');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('91', '125', '3');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('88', '128', '4');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('95', '127', '5');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('86', '125', '6');");
+        baseDatos.execSQL("INSERT INTO registros_presion_arterial (sistolica, diastolica, chequeoSaludId) VALUES ('70', '121', '7');");
 
 
 

@@ -109,7 +109,7 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CONSUMO_AGUA + " REAL NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
@@ -128,7 +128,7 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 BPM + " INT NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
@@ -148,7 +148,7 @@ public  class SaludDB {
                 SISTOLICA + " INT NOT NULL," +
                 DIASTOLICA + " INT NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+  CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
@@ -168,7 +168,7 @@ public  class SaludDB {
                 DURACION_DIETA + " INT NOT NULL," +
                 TOTAL_CALORIAS + " REAL NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
@@ -351,15 +351,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
-
-
-
-
-
-
-
 
 
     public static abstract class TablaTipoComida implements BaseColumns{

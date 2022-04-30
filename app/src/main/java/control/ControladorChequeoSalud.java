@@ -65,7 +65,7 @@ public class ControladorChequeoSalud {
                 null,
                 null,
                 null,
-                SaludDB.TablaChequeoSalud.FECHA_CHEQUEO + " ASC");
+                SaludDB.TablaChequeoSalud.FECHA_CHEQUEO + " DESC");
         while (cursor.moveToNext()){
             ChequeoSalud chequeoSalud = new ChequeoSalud(
                     cursor.getInt(0),
@@ -89,12 +89,12 @@ public class ControladorChequeoSalud {
 
     //OBTENER REGISTRO POR ID
     public ChequeoSalud consultarPorId(int parametro){
-        String [] id = { String.valueOf(parametro) };
+        //String [] id = { String.valueOf(parametro) };
         abrirDB();
         Cursor cursor = instanciaBD.query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, camposChequeSalud,
-                "id = ?",
-                id,
+                "id=" + parametro,
+                null,
                 null,
                 null,
                 null);
