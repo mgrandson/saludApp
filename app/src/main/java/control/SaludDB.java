@@ -41,7 +41,6 @@ public  class SaludDB {
 
     }
 
-
     //laves foraneas OK
     public static abstract class TablaRangoImc implements BaseColumns{
         //Nombre de la tabla
@@ -49,7 +48,7 @@ public  class SaludDB {
 
         //Nombre de campos
         public static final String ID = "id";
-        public static final String SEXO_IMC = "alturaMinima";
+        public static final String SEXO_IMC = "sexoImc";
         public static final String RANGO_ALTURA_ID = "rangoAlturaId";
         public static final String RANGO_PESO_ID = "rangoPesoId";
 
@@ -64,7 +63,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
 
     //laves foraneas OK
     public static abstract class TablaChequeoSalud implements BaseColumns{
@@ -97,7 +95,6 @@ public  class SaludDB {
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
 
-
     //laves foraneas OK
     public static abstract class TablaRegistroHidratacion implements BaseColumns{
         //Nombre de la tabla
@@ -112,13 +109,11 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CONSUMO_AGUA + " REAL NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
     //laves foraneas OK
     public static abstract class TablaRegistroRitmoCardiaco implements BaseColumns{
         //Nombre de la tabla
@@ -133,12 +128,10 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 BPM + " INT NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
     //laves foraneas OK
     public static abstract class TablaRegistroPresionArterial implements BaseColumns{
         //Nombre de la tabla
@@ -155,12 +148,10 @@ public  class SaludDB {
                 SISTOLICA + " INT NOT NULL," +
                 DIASTOLICA + " INT NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+  CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
     //laves foraneas OK
     public static abstract class TablaDietaAlimenticia implements BaseColumns{
         //Nombre de la tabla
@@ -177,12 +168,10 @@ public  class SaludDB {
                 DURACION_DIETA + " INT NOT NULL," +
                 TOTAL_CALORIAS + " REAL NOT NULL," +
                 CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
+                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+"));";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
 
     //laves foraneas OK
     public static abstract class TablaRegistroDietaDiaria implements BaseColumns{
@@ -203,8 +192,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
 
     //laves foraneas OK
     public static abstract class TablaDetalleDietaPorTiempo implements BaseColumns{
@@ -227,8 +214,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
 
     //laves foraneas OK
     public static abstract class TablaDetalleDeportePorFactor implements BaseColumns{
@@ -254,8 +239,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
-
 
 
     //laves foraneas OK
@@ -297,7 +280,6 @@ public  class SaludDB {
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
 
-
     public static abstract class TablaDiaSemana implements BaseColumns{
         //Nombre de la tabla
         public static final String NOMBRE_TABLA = "dias_semana";
@@ -313,7 +295,6 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
 
     public static abstract class TablaFactorActividad implements BaseColumns{
         //Nombre de la tabla
@@ -333,7 +314,6 @@ public  class SaludDB {
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
 
-
     public static abstract class TablaRangoAltura implements BaseColumns{
         //Nombre de la tabla
         public static final String NOMBRE_TABLA = "rangos_altura";
@@ -351,6 +331,7 @@ public  class SaludDB {
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
+
 
 
     public static abstract class TablaRangoPeso implements BaseColumns{

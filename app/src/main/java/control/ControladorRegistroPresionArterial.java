@@ -1,7 +1,11 @@
 package control;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import entidades.RegistroPresionArterial;
+import entidades.RegistroRitmoCardiaco;
 
 public class ControladorRegistroPresionArterial {
     private SaludSqliteHelper saludSqliteHelper;
@@ -28,4 +32,33 @@ public class ControladorRegistroPresionArterial {
     public void cerrarDB(){
         instanciaBD.close();
     }
+
+
+
+    /**
+     * Busca el ritmo cardiaco del chequeo de salud
+     *
+     * @param idChqueoSalud
+     * @return
+     */
+    public RegistroPresionArterial buscarPorIdChequeoSalud(Integer idChqueoSalud){
+        Cursor cursor = abrirDB().query(SaludDB.TablaRegistroPresionArterial.NOMBRE_TABLA,camposRegistroPresionArterial,"chequeoSaludId =" + idChqueoSalud,null,null,null,null);
+        if(cursor.moveToFirst()){
+            RegistroPresionArterial registroPresionArterial = new RegistroPresionArterial();
+            registroPresionArterial.setId(cursor.getInt(0));
+            registroPresionArterial.setSistolica(cursor.getInt(1));
+            registroPresionArterial.setDiastolica(cursor.getInt(2));
+            registroPresionArterial.setChequeoSaludId(cursor.getInt(3));
+            cerrarDB();
+            return registroPresionArterial;
+
+        }
+        cerrarDB();
+        return null;
+    }
+
 }
+
+
+
+

@@ -1,7 +1,11 @@
 package control;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import entidades.RegistroRitmoCardiaco;
+import entidades.Usuario;
 
 public class ControladorRegistroRitmoCardiaco {
     private SaludSqliteHelper saludSqliteHelper;
@@ -27,4 +31,31 @@ public class ControladorRegistroRitmoCardiaco {
     public void cerrarDB(){
         instanciaBD.close();
     }
+
+
+    /**
+     * Busca el ritmo cardiaco del chequeo de salud
+     *
+     * @param idChqueoSalud
+     * @return
+     */
+    public RegistroRitmoCardiaco buscarPorIdChequeoSalud(Integer idChqueoSalud){
+
+
+        Cursor cursor = abrirDB().query(SaludDB.TablaRegistroRitmoCardiaco.NOMBRE_TABLA,camposRegistroRitmoCardiaco,"chequeoSaludId =" + idChqueoSalud,null,null,null,null);
+        if(cursor.moveToFirst()){
+            RegistroRitmoCardiaco registroRitmoCardiaco = new RegistroRitmoCardiaco();
+            registroRitmoCardiaco.setId(cursor.getInt(0));
+            registroRitmoCardiaco.setBpm(cursor.getInt(1));
+            registroRitmoCardiaco.setChequeoSaludId(cursor.getInt(2));
+
+            cerrarDB();
+            return registroRitmoCardiaco;
+
+        }
+        cerrarDB();
+        return null;
+
+    }
+
 }

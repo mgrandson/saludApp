@@ -16,6 +16,11 @@ import android.widget.Toast;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
+
+import control.ControladorChequeoSalud;
+import control.SaludDB;
+import entidades.ChequeoSalud;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,43 +29,8 @@ import java.util.ArrayList;
 public class listaChekeoMedico extends Fragment {
 
 
-    /**
-     * esta es la entidad de chekeo medio, la crre aqui solo para pruebas con los valores que es necesitaran para listar los chequeos
-     */
-    public class chequeo{
-        private String fecha;
-        private float peso;
-
-
-        public chequeo(String fecha, float peso) {
-            this.fecha = fecha;
-            this.peso = peso;
-
-        }
-
-        public String getFecha() {
-            return fecha;
-        }
-
-        public void setFecha(String fecha) {
-            this.fecha = fecha;
-        }
-
-        public float getPeso() {
-
-            return Math.round(peso);
-        }
-
-        public void setPeso(float peso) {
-            this.peso = peso;
-        }
-
-
-    }
-
-
-    ArrayList<chequeo> chequeos;
-    Integer i =0;
+    ControladorChequeoSalud controladorChequeoSalud;
+    List<ChequeoSalud> chequeos;
     ListView listaChequeosMedicos;
 
     @Override
@@ -75,11 +45,11 @@ public class listaChekeoMedico extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listaChequeosMedicos = view.findViewById(R.id.listviewChequeoMedicos);
+        controladorChequeoSalud = new ControladorChequeoSalud(getContext());
         chequeos = new ArrayList<>();
-        for(i=0;i<20;i++){
-            chequeos.add(new chequeo(i +"/04/2022", i*1.1f));
+        chequeos = controladorChequeoSalud.obtenerRegistros();
 
-        }
+
         adaptadorListaChequedosMedicos adaptadorListaChequedosMedicos = new adaptadorListaChequedosMedicos(getContext(),chequeos);
         listaChequeosMedicos.setAdapter(adaptadorListaChequedosMedicos);
 
