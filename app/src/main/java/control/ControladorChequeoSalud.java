@@ -85,8 +85,6 @@ public class ControladorChequeoSalud {
 
 
 
-
-
     //OBTENER REGISTRO POR ID
     public ChequeoSalud consultarPorId(int parametro){
         //String [] id = { String.valueOf(parametro) };
@@ -116,6 +114,7 @@ public class ControladorChequeoSalud {
             return null;
         }
     }
+
     //ACTUALIZAR REGISTRO
     public long actualizar(ChequeoSalud chequeoSalud){
         //VERIFICAR INTEGRIDAD
@@ -131,6 +130,7 @@ public class ControladorChequeoSalud {
         cerrarDB();
         return resultado;
     }
+
     //ELIMINAR REGISTRO
     public long eliminar(ChequeoSalud chequeoSalud){
         abrirDB();

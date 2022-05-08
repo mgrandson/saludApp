@@ -1,7 +1,9 @@
 package com.ues.saludapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import control.ControladorChequeoSalud;
 import control.ControladorRegistroPresionArterial;
 import control.ControladorRegistroRitmoCardiaco;
 import entidades.ChequeoSalud;
@@ -36,6 +39,7 @@ public class adaptadorListaChequedosMedicos extends BaseAdapter {
     ControladorRegistroPresionArterial controladorRegistroPresionArterial;
     RegistroRitmoCardiaco registroRitmoCardiaco;
     RegistroPresionArterial registroPresionArterial;
+    ControladorChequeoSalud controladorChequeoSalud;
     LayoutInflater inflater;
 
 
@@ -98,26 +102,43 @@ public class adaptadorListaChequedosMedicos extends BaseAdapter {
         ImageView imageViewEdit = itemView.findViewById(R.id.imgEdit);
         Long dias = diasDiferencia(chequeos.get(i).getFechaChequeo().toString());
 
-        if(dias == 0) {
-            imageViewEdit.setImageResource(R.drawable.edit);
-        }
-        else
-        {
-            imageViewEdit.setImageResource(R.drawable.edit_disable);
-        }
+
+            imageViewEdit.setImageResource(R.drawable.ic_baseline_delete_24);
 
 
         imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //falta validar que solo se pueda editar si el chequeo es menor a 2 dias de haberse creado
-                if(dias == 0) {
-                    //enviar el id del chequeo
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("idChequeo",chequeos.get(i).getId());
-                    Navigation.findNavController(view).navigate(R.id.action_listaChekeoMedico_to_editarChequeoMedico,bundle);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                // Set the message show for the Alert time
+                builder.setMessage("Desea eliminar chequeo?");
+                builder.setIcon(android.R.drawable.ic_dialog_alert) ;
 
-                }
+                // Set Alert Title
+                builder.setTitle("Confirmar");
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        controladorChequeoSalud = new ControladorChequeoSalud(context);
+                        controladorChequeoSalud.eliminar(chequeos.get(i));
+                        chequeos.remove(i);
+                        notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                });
+
+                // Create the Alert dialog
+                AlertDialog alertDialog = builder.create();
+                // Show the Alert Dialog box
+                alertDialog.show();
+
             }
         });
 

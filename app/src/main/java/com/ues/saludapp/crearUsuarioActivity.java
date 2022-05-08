@@ -136,6 +136,8 @@ public class crearUsuarioActivity extends AppCompatActivity {
                    dialog.cancel();
                 }
             });
+
+
             // Create the Alert dialog
             AlertDialog alertDialog = builder.create();
             // Show the Alert Dialog box
