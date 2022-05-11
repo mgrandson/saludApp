@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".AgregarChequeoMedicoFragment">
+
+    <!-- ENCABEZADO -->
+
+    <View
+        android:id="@+id/topView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/chequeo"
+        app:layout_constraintEnd_toEndOf="@+id/topView"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topView"
+        app:srcCompat="@drawable/chequeo"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/lblAgregarChequeo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/agregar_chequeo"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- FIN ENCABEZADO -->
+    <!-- CONTENIDO -->
+
+    <TextView
+        android:id="@+id/lblTituloAgregarChequeo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/lblTituloAgregarChequeo"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topView" />
+
+    <TextView
+        android:id="@+id/lblPresionArterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:text="@string/lblPresionArterial"
+        android:textColor="#78909C"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAlturaActual" />
+
+    <EditText
+        android:id="@+id/txtRitmoCardiaco"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/txtRitmoCardiaco"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:numeric="integer"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtConsumoAgua" />
+
+    <EditText
+        android:id="@+id/txtPesoActual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/txtPesoActual"
+        android:inputType="number|numberDecimal"
+        android:minHeight="48dp"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTituloAgregarChequeo" />
+
+    <EditText
+        android:id="@+id/txtPresionArterialSistolica"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Sistolica"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:numeric="integer"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPresionArterial" />
+
+    <EditText
+        android:id="@+id/txtPresionArterialDiastolica"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Diastolica"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:numeric="integer"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtPresionArterialSistolica"
+        app:layout_constraintTop_toBottomOf="@+id/lblPresionArterial" />
+
+    <EditText
+        android:id="@+id/txtConsumoAgua"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/txtConsumoAgua"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:numeric="integer"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPresionArterialDiastolica" />
+
+    <EditText
+        android:id="@+id/txtAlturaActual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:background="@drawable/borde_redondo"
+        android:drawableStart="@drawable/ic_person_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/txtAlturaActual"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:numeric="integer"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="#78909C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPesoActual" />
+
+    <Button
+        android:id="@+id/btnEvaluar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/btnCrearChequeo"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRitmoCardiaco" />
+
+    <!-- FIN CONTENIDO -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarChequeoMedicoFragment"/>-->
