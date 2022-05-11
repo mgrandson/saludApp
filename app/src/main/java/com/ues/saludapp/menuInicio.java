@@ -71,7 +71,7 @@ public class menuInicio extends Fragment {
         txtRutinaEjercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_menuInicio_to_ejercicio);
+                Navigation.findNavController(view).navigate(R.id.action_menuInicio_to_crearRutinaEjercicioFragment);
             }
         });
 
