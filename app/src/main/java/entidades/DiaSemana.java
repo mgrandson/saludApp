@@ -35,8 +35,15 @@ public class DiaSemana {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaDiaSemana.ID, id);
         valoresEntidad.put(SaludDB.TablaDiaSemana.NOMBRE_DIA, nombreDia);
         return valoresEntidad;
+    }
+
+    @Override
+    public String toString() {
+        return "DiaSemana{" +
+                "id=" + id +
+                ", nombreDia='" + nombreDia + '\'' +
+                '}';
     }
 }

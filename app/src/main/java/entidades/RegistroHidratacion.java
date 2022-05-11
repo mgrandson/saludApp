@@ -44,8 +44,6 @@ public class RegistroHidratacion {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-
-        valoresEntidad.put(SaludDB.TablaRegistroHidratacion.ID, id);
         valoresEntidad.put(SaludDB.TablaRegistroHidratacion.CONSUMO_AGUA, consumoAgua);
         valoresEntidad.put(SaludDB.TablaRegistroHidratacion.CHEQUEO_SALUD_ID, chequeoSaludId);
 

@@ -56,8 +56,8 @@ public  class SaludDB {
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 SEXO_IMC + " TEXT NOT NULL," +
-                RANGO_ALTURA_ID + " INT NOT NULL," +
-                RANGO_PESO_ID + " INT NOT NULL," +
+                RANGO_ALTURA_ID + " INTEGER NOT NULL," +
+                RANGO_PESO_ID + " INTEGER NOT NULL," +
                 "FOREIGN KEY("+RANGO_PESO_ID+") REFERENCES "+ TablaRangoPeso.NOMBRE_TABLA+ "("+TablaRangoPeso.ID+"),"
                 +"FOREIGN KEY("+ RANGO_ALTURA_ID+") REFERENCES "+TablaRangoAltura.NOMBRE_TABLA+"("+TablaRangoAltura.ID+"));";
 
@@ -76,6 +76,7 @@ public  class SaludDB {
         public static final String ALTURA_ACTUAL = "alturaActual";
         public static final String VALOR_IMC_ACTUAL = "valorImcActual";
         public static final String MENSAJE_IMC_ACTUAL = "mensajeImcActual";
+        public static final String ESTADO = "estado";
         public static final String RANGOS_IMC_ID = "rangosImcId";
         public static final String USUARIOS_ID = "usuariosId";
 
@@ -86,8 +87,9 @@ public  class SaludDB {
                 ALTURA_ACTUAL + " REAL NOT NULL," +
                 VALOR_IMC_ACTUAL + " REAL NOT NULL," +
                 MENSAJE_IMC_ACTUAL + " TEXT NOT NULL," +
-                RANGOS_IMC_ID +" INT NOT NULL," +
-                USUARIOS_ID +" INT NOT NULL," +
+                ESTADO + " TEXT NOT NULL," +
+                RANGOS_IMC_ID +" INTEGER NOT NULL," +
+                USUARIOS_ID +" INTEGER NOT NULL," +
                 "FOREIGN KEY("+RANGOS_IMC_ID+") REFERENCES "+ TablaRangoImc.NOMBRE_TABLA+ "("+TablaRangoImc.ID+"),"
                 +"FOREIGN KEY("+ USUARIOS_ID+") REFERENCES "+TablaUsuarioDB.NOMBRE_TABLA+"("+TablaUsuarioDB.ID+"));";
 
@@ -108,13 +110,11 @@ public  class SaludDB {
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 CONSUMO_AGUA + " REAL NOT NULL," +
-                CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
-
+                CHEQUEO_SALUD_ID + " INTEGER NOT NULL,"+
+                "FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
     //laves foraneas OK eliminacion en cascada
     public static abstract class TablaRegistroRitmoCardiaco implements BaseColumns{
         //Nombre de la tabla
@@ -128,12 +128,11 @@ public  class SaludDB {
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 BPM + " INT NOT NULL," +
-                CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
+                CHEQUEO_SALUD_ID + " INTEGER NOT NULL,"+
+                "FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
 
     //laves foraneas OK eliminacion en cascada
     public static abstract class TablaRegistroPresionArterial implements BaseColumns{
@@ -150,8 +149,8 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 SISTOLICA + " INT NOT NULL," +
                 DIASTOLICA + " INT NOT NULL," +
-                CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+  CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
+                CHEQUEO_SALUD_ID + " INTEGER NOT NULL, "+
+                "FOREIGN KEY("+CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
@@ -171,9 +170,8 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 DURACION_DIETA + " INT NOT NULL," +
                 TOTAL_CALORIAS + " REAL NOT NULL," +
-                CHEQUEO_SALUD_ID + " INT NOT NULL"
-                +",FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
-
+                CHEQUEO_SALUD_ID + " INTEGER NOT NULL,"+
+                "FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
 
@@ -189,8 +187,8 @@ public  class SaludDB {
 
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                DIETA_ALIMENTICIA_ID + " INT NOT NULL," +
-                DIA_SEMANA_ID + " INT NOT NULL" +
+                DIETA_ALIMENTICIA_ID + " INTEGER NOT NULL," +
+                DIA_SEMANA_ID + " INTEGER NOT NULL" +
                 ",FOREIGN KEY("+DIETA_ALIMENTICIA_ID+") REFERENCES "+ TablaDietaAlimenticia.NOMBRE_TABLA+ "("+TablaDietaAlimenticia.ID+"),"
                 +"FOREIGN KEY("+ DIA_SEMANA_ID+") REFERENCES "+TablaDiaSemana.NOMBRE_TABLA+"("+TablaDiaSemana.ID+"));";
 
@@ -211,8 +209,8 @@ public  class SaludDB {
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 TIEMPO_COMIDA + " TEXT NOT NULL," +
-                REGISTRO_DIETA_DIARIA_ID + " INT NOT NULL," +
-                TIPO_COMIDA_ID + " INT NOT NULL" +
+                REGISTRO_DIETA_DIARIA_ID + " INTEGER NOT NULL," +
+                TIPO_COMIDA_ID + " INTEGER NOT NULL" +
                 ",FOREIGN KEY("+REGISTRO_DIETA_DIARIA_ID+") REFERENCES "+ TablaRegistroDietaDiaria.NOMBRE_TABLA+ "("+TablaRegistroDietaDiaria.ID+"),"
                 +"FOREIGN KEY("+ TIPO_COMIDA_ID+") REFERENCES "+TablaTipoComida.NOMBRE_TABLA+"("+TablaTipoComida.ID+"));";
 
@@ -235,15 +233,14 @@ public  class SaludDB {
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ENERGIA_GASTADA + " REAL NOT NULL," +
                 DURACION + " INT NOT NULL," +
-                FACTOR_ACTIVIDAD_ID + " INT NOT NULL," +
-                DEPORTE_ID + " INT NOT NULL" +
+                FACTOR_ACTIVIDAD_ID + " INTEGER NOT NULL," +
+                DEPORTE_ID + " INTEGER NOT NULL" +
                 ",FOREIGN KEY("+FACTOR_ACTIVIDAD_ID+") REFERENCES "+ TablaFactorActividad.NOMBRE_TABLA+ "("+TablaFactorActividad.ID+"),"
                 +"FOREIGN KEY("+ DEPORTE_ID+") REFERENCES "+TablaDeportes.NOMBRE_TABLA+"("+TablaDeportes.ID+"));";
 
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
-
 
     //laves foraneas OK eliminacion en cascada
     public static abstract class TablaRegistroActividadFisicaDiaria implements BaseColumns{
@@ -252,18 +249,22 @@ public  class SaludDB {
 
         //Nombre de campos
         public static final String ID = "id";
+        public static final String FECHA_ACTIVIDAD = "fechaActividad";
+        public static final String ESTADO = "estado";
         public static final String DIA_SEMANA_ID = "diaSemanaId";
         public static final String DETALLE_DEPORTE_POR_FACTOR_ID = "detalleDeportePorFactorId";
         public static final String CHEQUEO_SALUD_ID = "chequeoSaludId";
 
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                DIA_SEMANA_ID + " INT NOT NULL," +
-                DETALLE_DEPORTE_POR_FACTOR_ID + " INT NOT NULL," +
-                CHEQUEO_SALUD_ID + " INT NOT NULL" +
-                ",FOREIGN KEY("+DIA_SEMANA_ID+") REFERENCES "+ TablaDiaSemana.NOMBRE_TABLA+ "("+TablaDiaSemana.ID+")"+
-                ",FOREIGN KEY("+DETALLE_DEPORTE_POR_FACTOR_ID+") REFERENCES "+ TablaDetalleDeportePorFactor.NOMBRE_TABLA+ "("+TablaDetalleDeportePorFactor.ID+"),"
-                +"FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
+                FECHA_ACTIVIDAD + " DATETIME NOT NULL," +
+                ESTADO + " TEXT NOT NULL," +
+                DIA_SEMANA_ID + " INTEGER NOT NULL," +
+                DETALLE_DEPORTE_POR_FACTOR_ID + " INTEGER NOT NULL," +
+                CHEQUEO_SALUD_ID + " INTEGER NOT NULL," +
+                "FOREIGN KEY("+DIA_SEMANA_ID+") REFERENCES "+ TablaDiaSemana.NOMBRE_TABLA+ "("+TablaDiaSemana.ID+"),"+
+                "FOREIGN KEY("+DETALLE_DEPORTE_POR_FACTOR_ID+") REFERENCES "+ TablaDetalleDeportePorFactor.NOMBRE_TABLA+ "("+TablaDetalleDeportePorFactor.ID+"),"+
+                "FOREIGN KEY("+ CHEQUEO_SALUD_ID+") REFERENCES "+TablaChequeoSalud.NOMBRE_TABLA+"("+TablaChequeoSalud.ID_CHEQUEO+") ON DELETE CASCADE);";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
@@ -306,7 +307,7 @@ public  class SaludDB {
 
         //Nombre de campos
         public static final String ID = "id";
-        public static final String FACTOR = "nombreDia";
+        public static final String FACTOR = "factor";
         public static final String DESCRIPCION = "descripcion";
 
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
@@ -336,21 +337,19 @@ public  class SaludDB {
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";
     }
 
-
-
     public static abstract class TablaRangoPeso implements BaseColumns{
         //Nombre de la tabla
         public static final String NOMBRE_TABLA = "rangos_peso";
 
         //Nombre de campos
         public static final String ID = "id";
-        public static final String PESO_MINIMA = "pesoMinima";
-        public static final String PESO_MAXIMA = "pesoMaxima";
+        public static final String PESO_MINIMO = "pesoMinimo";
+        public static final String PESO_MAXIMO = "pesoMaximo";
 
         public static final String CREAR_TABLA = "CREATE TABLE "+ NOMBRE_TABLA +" (" +
                 ID +" INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PESO_MINIMA + " REAL NOT NULL," +
-                PESO_MAXIMA + " REAL NOT NULL" +
+                PESO_MINIMO + " REAL NOT NULL," +
+                PESO_MAXIMO + " REAL NOT NULL" +
                 ");";
 
         public static final String ELIMINAR_TABLA = "DROP TABLE IF EXISTS "+ NOMBRE_TABLA +";";

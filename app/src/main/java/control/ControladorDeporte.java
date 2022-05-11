@@ -40,8 +40,11 @@ public class ControladorDeporte {
     //CRUD
 
     public long crear(Deporte deporte){
-        abrirDB();
-        Long resultado = instanciaBD.insert(SaludDB.TablaDeportes.NOMBRE_TABLA,null, deporte.toContentvalues());
+
+        Long resultado = abrirDB().insert(
+                SaludDB.TablaDeportes.NOMBRE_TABLA,
+                null, deporte.toContentvalues()
+        );
         cerrarDB();
         return resultado;
     }
@@ -49,7 +52,7 @@ public class ControladorDeporte {
     public List<Deporte> obtenerRegistros(){
         List<Deporte> lstDeportes = new ArrayList<>();
         abrirDB();
-        Cursor cursor = instanciaBD.query(
+        Cursor cursor = abrirDB().query(
                 SaludDB.TablaDeportes.NOMBRE_TABLA,
                 null,
                 null,
@@ -72,7 +75,7 @@ public class ControladorDeporte {
         Deporte deporte = new Deporte();
         String [] id = { String.valueOf(parametro) };
         abrirDB();
-        Cursor cursor = instanciaBD.query(
+        Cursor cursor = abrirDB().query(
                 SaludDB.TablaDeportes.NOMBRE_TABLA, camposDeporte,
                 "id = ?",
                 id,
@@ -96,7 +99,7 @@ public class ControladorDeporte {
 
         String [] id = { String.valueOf(deporte.getId()) };
         abrirDB();
-        long resultado = instanciaBD.update(
+        long resultado = abrirDB().update(
                 SaludDB.TablaDeportes.NOMBRE_TABLA,
                 deporte.toContentvalues(),
                 "id = ?",
@@ -109,7 +112,7 @@ public class ControladorDeporte {
     public long eliminar(Deporte deporte){
         abrirDB();
         String [] id = { String.valueOf(deporte.getId()) };
-        long resultado = instanciaBD.delete(
+        long resultado = abrirDB().delete(
                 SaludDB.TablaDeportes.NOMBRE_TABLA, "id = ?",
                 id
         );

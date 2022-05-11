@@ -2,13 +2,22 @@ package control;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.PrintStream;
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import entidades.ChequeoSalud;
 import entidades.Deporte;
+import entidades.DetalleDietaPorTiempo;
+import entidades.DietaAlimenticia;
+import entidades.RegistroDietaDiaria;
 
 public class ControladorChequeoSalud {
     private SaludSqliteHelper saludSqliteHelper;
@@ -22,6 +31,7 @@ public class ControladorChequeoSalud {
             SaludDB.TablaChequeoSalud.ALTURA_ACTUAL,
             SaludDB.TablaChequeoSalud.VALOR_IMC_ACTUAL,
             SaludDB.TablaChequeoSalud.MENSAJE_IMC_ACTUAL,
+            SaludDB.TablaChequeoSalud.ESTADO,
             SaludDB.TablaChequeoSalud.RANGOS_IMC_ID,
             SaludDB.TablaChequeoSalud.USUARIOS_ID
     };
@@ -44,12 +54,13 @@ public class ControladorChequeoSalud {
 
     //INSERTAR REGISTRO
     public long crear(ChequeoSalud chequeoSalud){
-        abrirDB();
-        Long resultado = instanciaBD.insert(
+        Long resultado = abrirDB().insert(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA,
                 null,
                 chequeoSalud.toContentvalues()
         );
+        System.out.println("CHEQUEO SALUD: ID => "+resultado);
+        System.out.println(chequeoSalud);
         cerrarDB();
         return resultado;
     }
@@ -57,8 +68,7 @@ public class ControladorChequeoSalud {
     //OBTENER TODOS LOS REGISTROS
     public List<ChequeoSalud> obtenerRegistros(){
         List<ChequeoSalud> listaRegistros = new ArrayList<>();
-        abrirDB();
-        Cursor cursor = instanciaBD.query(
+        Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA,
                 null,
                 null,
@@ -75,21 +85,20 @@ public class ControladorChequeoSalud {
                     cursor.getDouble(4),
                     cursor.getString(5),
                     cursor.getString(6),
-                    cursor.getString(7));
-             listaRegistros.add(chequeoSalud);
+                    cursor.getString(7),
+                    cursor.getString(8));
+            listaRegistros.add(chequeoSalud);
         }
         cursor.close();
         cerrarDB();
         return listaRegistros;
     }
 
-
-
     //OBTENER REGISTRO POR ID
     public ChequeoSalud consultarPorId(int parametro){
         //String [] id = { String.valueOf(parametro) };
         abrirDB();
-        Cursor cursor = instanciaBD.query(
+        Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, camposChequeSalud,
                 "id=" + parametro,
                 null,
@@ -105,7 +114,8 @@ public class ControladorChequeoSalud {
                     cursor.getDouble(4),
                     cursor.getString(5),
                     cursor.getString(6),
-                    cursor.getString(7));
+                    cursor.getString(7),
+                    cursor.getString(8));
             cursor.close();
             cerrarDB();
             return chequeoSalud;
@@ -121,7 +131,7 @@ public class ControladorChequeoSalud {
 
         String [] id = { String.valueOf(chequeoSalud.getId()) };
         abrirDB();
-        long resultado = instanciaBD.update(
+        long resultado = abrirDB().update(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA,
                 chequeoSalud.toContentvalues(),
                 "id = ?",
@@ -135,11 +145,43 @@ public class ControladorChequeoSalud {
     public long eliminar(ChequeoSalud chequeoSalud){
         abrirDB();
         String [] id = { String.valueOf(chequeoSalud.getId()) };
-        long resultado = instanciaBD.delete(
+        long resultado = abrirDB().delete(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, "id = ?",
                 id
         );
         return resultado;
+    }
+
+    //FUNCIONES ESPECIALES
+
+    public ChequeoSalud consultarPorEstado(String parametro){
+        String [] estado = { parametro };
+        abrirDB();
+        Cursor cursor = abrirDB().query(
+                SaludDB.TablaChequeoSalud.NOMBRE_TABLA, camposChequeSalud,
+                "estado = ?",
+                estado,
+                null,
+                null,
+                null);
+        if(cursor.moveToFirst()){
+            ChequeoSalud chequeoSalud = new ChequeoSalud(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getDouble(2),
+                    cursor.getDouble(3),
+                    cursor.getDouble(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getString(8));
+            cursor.close();
+            cerrarDB();
+            return chequeoSalud;
+        }
+        else{
+            return null;
+        }
     }
 
 }

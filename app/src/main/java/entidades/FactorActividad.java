@@ -44,7 +44,6 @@ public class FactorActividad {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaFactorActividad.ID, id);
         valoresEntidad.put(SaludDB.TablaFactorActividad.FACTOR, factor);
         valoresEntidad.put(SaludDB.TablaFactorActividad.DESCRIPCION, descripcion);
         return valoresEntidad;
