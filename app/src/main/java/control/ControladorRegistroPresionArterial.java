@@ -90,4 +90,30 @@ public class ControladorRegistroPresionArterial {
             return null;
         }
     }
+
+    /**
+     * Busca el ritmo cardiaco del chequeo de salud
+     *
+     * @param idChqueoSalud
+     * @return
+     */
+    public RegistroPresionArterial buscarPorIdChequeoSalud(Integer idChqueoSalud){
+        Cursor cursor = abrirDB().query(SaludDB.TablaRegistroPresionArterial.NOMBRE_TABLA,camposRegistroPresionArterial,"chequeoSaludId =" + idChqueoSalud,null,null,null,null);
+        if(cursor.moveToFirst()){
+            RegistroPresionArterial registroPresionArterial = new RegistroPresionArterial();
+            registroPresionArterial.setId(cursor.getInt(0));
+            registroPresionArterial.setSistolica(cursor.getInt(1));
+            registroPresionArterial.setDiastolica(cursor.getInt(2));
+            registroPresionArterial.setChequeoSaludId(cursor.getInt(3));
+            cerrarDB();
+            return registroPresionArterial;
+
+        }
+        cerrarDB();
+        return null;
+    }
 }
+
+
+
+

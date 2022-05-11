@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import control.ControladorChequeoSalud;
+import entidades.ChequeoSalud;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
@@ -26,11 +29,27 @@ public class editarChequeoMedico extends Fragment {
     }
 
     TextView txtFecha;
+    ControladorChequeoSalud controladorChequeoSalud;
+    ChequeoSalud chequeoSalud;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //txtFecha = view.findViewById(R.id.textView6);
-        //txtFecha.setText(getArguments().getString("idChequeo"));
+        controladorChequeoSalud = new ControladorChequeoSalud(getContext());
+        chequeoSalud = controladorChequeoSalud.consultarPorId( getArguments().getInt("idChequeo"));
+        txtFecha = view.findViewById(R.id.textViewFechaChequeo);
+
+
+
+        if(chequeoSalud!=null){
+            txtFecha.setText(chequeoSalud.getFechaChequeo().toString());
+        }
+        else
+        {
+            txtFecha.setText("No se encontro");
+        }
+
+
+
 
     }
 }

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidades.Deporte;
+
 import entidades.RegistroRitmoCardiaco;
 
 public class ControladorRegistroRitmoCardiaco {
@@ -67,8 +67,8 @@ public class ControladorRegistroRitmoCardiaco {
         return listaRegistros;
     }
 
-    public RegistroRitmoCardiaco consultarPorId(int parametro){
-        String [] id = { String.valueOf(parametro) };
+    public RegistroRitmoCardiaco consultarPorId(int parametro) {
+        String[] id = {String.valueOf(parametro)};
         abrirDB();
         Cursor cursor = abrirDB().query(
                 SaludDB.TablaDeportes.NOMBRE_TABLA, camposRegistroRitmoCardiaco,
@@ -77,7 +77,7 @@ public class ControladorRegistroRitmoCardiaco {
                 null,
                 null,
                 null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             RegistroRitmoCardiaco ritmoCardiaco = new RegistroRitmoCardiaco(
                     cursor.getInt(0),
                     cursor.getInt(1),
@@ -86,10 +86,32 @@ public class ControladorRegistroRitmoCardiaco {
             cursor.close();
             cerrarDB();
             return ritmoCardiaco;
-        }
-        else{
+        } else {
             return null;
         }
+    }
+    /**
+     * Busca el ritmo cardiaco del chequeo de salud
+     *
+     * @param idChqueoSalud
+     * @return
+     */
+    public RegistroRitmoCardiaco buscarPorIdChequeoSalud(Integer idChqueoSalud){
+
+
+        Cursor cursor = abrirDB().query(SaludDB.TablaRegistroRitmoCardiaco.NOMBRE_TABLA,camposRegistroRitmoCardiaco,"chequeoSaludId =" + idChqueoSalud,null,null,null,null);
+        if(cursor.moveToFirst()){
+            RegistroRitmoCardiaco registroRitmoCardiaco = new RegistroRitmoCardiaco();
+            registroRitmoCardiaco.setId(cursor.getInt(0));
+            registroRitmoCardiaco.setBpm(cursor.getInt(1));
+            registroRitmoCardiaco.setChequeoSaludId(cursor.getInt(2));
+
+            cerrarDB();
+            return registroRitmoCardiaco;
+
+        }
+        cerrarDB();
+        return null;
     }
 
 }
