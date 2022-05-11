@@ -34,9 +34,13 @@ public class Deporte {
 
     public ContentValues toContentvalues(){
         ContentValues deporteValues = new ContentValues();
-        deporteValues.put(SaludDB.TablaDeportes.ID, id);
         deporteValues.put(SaludDB.TablaDeportes.DEPORTE, deporte);
         return deporteValues;
 
+    }
+
+    @Override
+    public String toString() {
+        return deporte;
     }
 }

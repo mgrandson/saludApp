@@ -54,8 +54,6 @@ public class RegistroPresionArterial {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-
-        valoresEntidad.put(SaludDB.TablaRegistroPresionArterial.ID, id);
         valoresEntidad.put(SaludDB.TablaRegistroPresionArterial.SISTOLICA, sistolica);
         valoresEntidad.put(SaludDB.TablaRegistroPresionArterial.DIASTOLICA, diastolica);
         valoresEntidad.put(SaludDB.TablaRegistroPresionArterial.CHEQUEO_SALUD_ID, chequeoSaludId);

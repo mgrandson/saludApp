@@ -44,7 +44,6 @@ public class RangoAltura {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaRangoAltura.ID, id);
         valoresEntidad.put(SaludDB.TablaRangoAltura.ALTURA_MINIMA, alturaMinima);
         valoresEntidad.put(SaludDB.TablaRangoAltura.ALTURA_MAXIMA, alturaMaxima);
         return valoresEntidad;

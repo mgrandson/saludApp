@@ -45,9 +45,8 @@ public class RangoPeso{
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
 
-        valoresEntidad.put(SaludDB.TablaRangoPeso.ID, id);
-        valoresEntidad.put(SaludDB.TablaRangoPeso.PESO_MINIMA, pesoMinimo);
-        valoresEntidad.put(SaludDB.TablaRangoPeso.PESO_MAXIMA, pesoMaximo);
+        valoresEntidad.put(SaludDB.TablaRangoPeso.PESO_MINIMO, pesoMinimo);
+        valoresEntidad.put(SaludDB.TablaRangoPeso.PESO_MAXIMO, pesoMaximo);
 
         return valoresEntidad;
     }

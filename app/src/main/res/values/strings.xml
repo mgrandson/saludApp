@@ -33,6 +33,22 @@
     <string name="chequeos_m_dicos">Chequeos médicos</string>
     <string name="agregar_chequeo">Agregar Chequeo</string>
     <string name="editar_chequeo_m_dico">Editar chequeo médico</string>
+
+    <!-- TEXTOS PANTALLA AGREGAR CHEQUEO DE SALUD -->
+    <string name="txtPesoActual">Peso (kg)</string>
+    <string name="txtAlturaActual">Altura (cm)</string>
+    <string name="txtPresionArterial">Presion arterial (sis.dias)</string>
+    <string name="txtConsumoAgua">Consumo de agua (vasos)</string>
+    <string name="txtRitmoCardiaco">Ritmo cardiaco (bpm)</string>
+
+    <string name="btnCrearChequeo">Crear</string>
+    <string name="lblTituloAgregarChequeo">Ingresa los datos siguientes:</string>
+
+    <!-- TEXTOS PANTALLA CRAER RUTINA DE EJERCICIOS -->
+    <string name="lblCrearRutinaEjercicio">Rutina de Ejercicio</string>
+    <string name="lblPresionArterial">Presion arterial:</string>
+
+    <!-- *************************************** -->
 </resources>
 
 

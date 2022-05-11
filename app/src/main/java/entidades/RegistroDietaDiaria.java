@@ -18,6 +18,11 @@ public class RegistroDietaDiaria {
         this.diaSemanaId = diaSemanaId;
     }
 
+    public RegistroDietaDiaria(int dietaAlimenticiaId, int diaSemanaId) {
+        this.dietaAlimenticiaId = dietaAlimenticiaId;
+        this.diaSemanaId = diaSemanaId;
+    }
+
     public int getId() {
         return id;
     }
@@ -45,10 +50,18 @@ public class RegistroDietaDiaria {
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
 
-        valoresEntidad.put(SaludDB.TablaRegistroDietaDiaria.ID, id);
         valoresEntidad.put(SaludDB.TablaRegistroDietaDiaria.DIETA_ALIMENTICIA_ID, dietaAlimenticiaId);
         valoresEntidad.put(SaludDB.TablaRegistroDietaDiaria.DIA_SEMANA_ID, diaSemanaId);
 
         return valoresEntidad;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistroDietaDiaria{" +
+                "id=" + id +
+                ", dietaAlimenticiaId=" + dietaAlimenticiaId +
+                ", diaSemanaId=" + diaSemanaId +
+                '}';
     }
 }

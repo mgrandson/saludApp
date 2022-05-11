@@ -10,8 +10,8 @@ public class ControladorRangoPeso {
 
     private static final String[] camposRangoPeso = {
             SaludDB.TablaRangoPeso.ID,
-            SaludDB.TablaRangoPeso.PESO_MINIMA,
-            SaludDB.TablaRangoPeso.PESO_MAXIMA
+            SaludDB.TablaRangoPeso.PESO_MINIMO,
+            SaludDB.TablaRangoPeso.PESO_MAXIMO
     };
 
     public ControladorRangoPeso(Context context){

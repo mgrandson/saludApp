@@ -54,11 +54,20 @@ public class RangoImc {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaRangoImc.ID, id);
         valoresEntidad.put(SaludDB.TablaRangoImc.SEXO_IMC, sexoImc);
         valoresEntidad.put(SaludDB.TablaRangoImc.RANGO_ALTURA_ID, rangoAlturaId);
         valoresEntidad.put(SaludDB.TablaRangoImc.RANGO_PESO_ID, rangoPesoId);
         
         return valoresEntidad;
+    }
+
+    @Override
+    public String toString() {
+        return "RangoImc{" +
+                "id=" + id +
+                ", sexoImc='" + sexoImc + '\'' +
+                ", rangoAlturaId=" + rangoAlturaId +
+                ", rangoPesoId=" + rangoPesoId +
+                '}';
     }
 }

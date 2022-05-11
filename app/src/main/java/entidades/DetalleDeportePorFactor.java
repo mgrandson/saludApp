@@ -64,7 +64,6 @@ public class DetalleDeportePorFactor {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaDetalleDeportePorFactor.ID, id);
         valoresEntidad.put(SaludDB.TablaDetalleDeportePorFactor.ENERGIA_GASTADA, energiaGastada);
         valoresEntidad.put(SaludDB.TablaDetalleDeportePorFactor.DURACION, duracion);
         valoresEntidad.put(SaludDB.TablaDetalleDeportePorFactor.FACTOR_ACTIVIDAD_ID, factorActividadId);
