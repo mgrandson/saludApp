@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import entidades.RegistroRitmoCardiaco;
-import entidades.Usuario;
 
 public class ControladorRegistroRitmoCardiaco {
     private SaludSqliteHelper saludSqliteHelper;
@@ -32,7 +35,61 @@ public class ControladorRegistroRitmoCardiaco {
         instanciaBD.close();
     }
 
+    //CRUD
 
+    public long crear(RegistroRitmoCardiaco registroRitmoCardiaco){
+        Long resultado = abrirDB().insert(SaludDB.TablaRegistroRitmoCardiaco.NOMBRE_TABLA,null, registroRitmoCardiaco.toContentvalues());
+        cerrarDB();
+        return resultado;
+    }
+
+    public List<RegistroRitmoCardiaco> obtenerRegistros(){
+        List<RegistroRitmoCardiaco> listaRegistros = new ArrayList<>();
+        abrirDB();
+        Cursor cursor = abrirDB().query(
+                SaludDB.TablaRegistroRitmoCardiaco.NOMBRE_TABLA,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+        while (cursor.moveToNext()){
+            RegistroRitmoCardiaco ritmoCardiaco = new RegistroRitmoCardiaco(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2)
+            );
+            listaRegistros.add(ritmoCardiaco);
+        }
+        cursor.close();
+        cerrarDB();
+        return listaRegistros;
+    }
+
+    public RegistroRitmoCardiaco consultarPorId(int parametro) {
+        String[] id = {String.valueOf(parametro)};
+        abrirDB();
+        Cursor cursor = abrirDB().query(
+                SaludDB.TablaDeportes.NOMBRE_TABLA, camposRegistroRitmoCardiaco,
+                "id = ?",
+                id,
+                null,
+                null,
+                null);
+        if (cursor.moveToFirst()) {
+            RegistroRitmoCardiaco ritmoCardiaco = new RegistroRitmoCardiaco(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2)
+            );
+            cursor.close();
+            cerrarDB();
+            return ritmoCardiaco;
+        } else {
+            return null;
+        }
+    }
     /**
      * Busca el ritmo cardiaco del chequeo de salud
      *
@@ -55,7 +112,6 @@ public class ControladorRegistroRitmoCardiaco {
         }
         cerrarDB();
         return null;
-
     }
 
 }

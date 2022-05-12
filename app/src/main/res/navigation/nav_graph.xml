@@ -25,6 +25,9 @@
             app:destination="@id/listaChekeoMedico"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_menuInicio_to_crearRutinaEjercicioFragment"
+            app:destination="@id/crearRutinaEjercicioFragment" />
     </fragment>
     <fragment
         android:id="@+id/dieta"
@@ -44,10 +47,51 @@
         <action
             android:id="@+id/action_listaChekeoMedico_to_editarChequeoMedico"
             app:destination="@id/editarChequeoMedico" />
+        <action
+            android:id="@+id/action_listaChekeoMedico_to_agregarChequeoMedicoFragment"
+            app:destination="@id/agregarChequeoMedicoFragment" />
     </fragment>
     <fragment
         android:id="@+id/editarChequeoMedico"
         android:name="com.ues.saludapp.editarChequeoMedico"
         android:label="fragment_editar_chequeo_medico"
         tools:layout="@layout/fragment_editar_chequeo_medico" />
+    <fragment
+        android:id="@+id/agregarChequeoMedicoFragment"
+        android:name="com.ues.saludapp.AgregarChequeoMedicoFragment"
+        android:label="fragment_agregar_chequeo_medico"
+        tools:layout="@layout/fragment_chequeo_medico_agregar" >
+        <action
+            android:id="@+id/action_agregarChequeoMedicoFragment_to_crearRutinaEjercicioFragment"
+            app:destination="@id/crearRutinaEjercicioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearRutinaEjercicioFragment"
+        android:name="com.ues.saludapp.actividadFisica.ActividadFisicaFragment"
+        android:label="fragment_crear_rutina_ejercicio"
+        tools:layout="@layout/fragment_actividad_fisica" >
+        <action
+            android:id="@+id/action_crearRutinaEjercicioFragment_to_actividadFisicaCrearActualizarFragment"
+            app:destination="@id/actividadFisicaCrearActualizarFragment" />
+        <action
+            android:id="@+id/action_crearRutinaEjercicioFragment_to_menuInicio"
+            app:destination="@id/menuInicio" />
+    </fragment>
+    <fragment
+        android:id="@+id/actividadFisicaCrearActualizarFragment"
+        android:name="com.ues.saludapp.actividadFisica.ActividadFisicaCrearActualizarFragment"
+        android:label="ActividadFisicaCrearActualizarFragment"
+        tools:layout="@layout/fragment_actividad_fisica_crear_actualizar">
+        <argument
+            android:name="isModify"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_actividadFisicaCrearActualizarFragment_to_crearRutinaEjercicioFragment"
+            app:destination="@id/crearRutinaEjercicioFragment" />
+    </fragment>
 </navigation>

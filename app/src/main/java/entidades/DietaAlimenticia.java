@@ -20,6 +20,12 @@ public class DietaAlimenticia {
         this.chequeoSaludId = chequeoSaludId;
     }
 
+    public DietaAlimenticia(int duracionDieta, double totalCalorias, int chequeoSaludId) {
+        this.duracionDieta = duracionDieta;
+        this.totalCalorias = totalCalorias;
+        this.chequeoSaludId = chequeoSaludId;
+    }
+
     public int getId() {
         return id;
     }
@@ -54,10 +60,19 @@ public class DietaAlimenticia {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaDietaAlimenticia.ID, id);
         valoresEntidad.put(SaludDB.TablaDietaAlimenticia.DURACION_DIETA, duracionDieta);
         valoresEntidad.put(SaludDB.TablaDietaAlimenticia.TOTAL_CALORIAS, totalCalorias);
         valoresEntidad.put(SaludDB.TablaDietaAlimenticia.CHEQUEO_SALUD_ID, chequeoSaludId);
         return valoresEntidad;
+    }
+
+    @Override
+    public String toString() {
+        return "DietaAlimenticia{" +
+                "id=" + id +
+                ", duracionDieta=" + duracionDieta +
+                ", totalCalorias=" + totalCalorias +
+                ", chequeoSaludId=" + chequeoSaludId +
+                '}';
     }
 }

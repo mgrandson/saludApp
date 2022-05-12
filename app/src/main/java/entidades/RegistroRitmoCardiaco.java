@@ -44,8 +44,6 @@ public class RegistroRitmoCardiaco {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-
-        valoresEntidad.put(SaludDB.TablaRegistroRitmoCardiaco.ID, id);
         valoresEntidad.put(SaludDB.TablaRegistroRitmoCardiaco.BPM, bpm);
         valoresEntidad.put(SaludDB.TablaRegistroRitmoCardiaco.CHEQUEO_SALUD_ID, chequeoSaludId);
 

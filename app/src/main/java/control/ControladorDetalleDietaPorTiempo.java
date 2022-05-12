@@ -3,6 +3,9 @@ package control;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import entidades.Deporte;
+import entidades.DetalleDietaPorTiempo;
+
 public class ControladorDetalleDietaPorTiempo {
     private SaludSqliteHelper saludSqliteHelper;
     private SQLiteDatabase instanciaBD;
@@ -27,5 +30,14 @@ public class ControladorDetalleDietaPorTiempo {
 
     public void cerrarDB(){
         instanciaBD.close();
+    }
+
+    public long crear(DetalleDietaPorTiempo dietaPorTiempo){
+        Long resultado = abrirDB().insert(
+                SaludDB.TablaDetalleDietaPorTiempo.NOMBRE_TABLA,
+                null, dietaPorTiempo.toContentvalues()
+        );
+        cerrarDB();
+        return resultado;
     }
 }

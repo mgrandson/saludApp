@@ -9,20 +9,33 @@ public class ChequeoSalud {
     private double pesoActual;
     private double alturaActual;
     private double valorImcActual;
-    private String mensajeImcActual;
+    private String mensajeImcActual = "No definido";
+    private String estado = "P";
     private String rangoImcId;
-    private String usuarioId;
+    private String usuarioId = "1";
 
     public ChequeoSalud() {
     }
 
-    public ChequeoSalud(int id, String fechaChequeo, double pesoActual, double alturaActual, double valorImcActual, String mensajeImcActual, String rangoImcId, String usuarioId) {
+    public ChequeoSalud(int id, String fechaChequeo, double pesoActual, double alturaActual, double valorImcActual, String mensajeImcActual, String estado, String rangoImcId, String usuarioId) {
         this.id = id;
         this.fechaChequeo = fechaChequeo;
         this.pesoActual = pesoActual;
         this.alturaActual = alturaActual;
         this.valorImcActual = valorImcActual;
         this.mensajeImcActual = mensajeImcActual;
+        this.estado = estado;
+        this.rangoImcId = rangoImcId;
+        this.usuarioId = usuarioId;
+    }
+
+    public ChequeoSalud(String fechaChequeo, double pesoActual, double alturaActual, double valorImcActual, String mensajeImcActual, String estado, String rangoImcId, String usuarioId) {
+        this.fechaChequeo = fechaChequeo;
+        this.pesoActual = pesoActual;
+        this.alturaActual = alturaActual;
+        this.valorImcActual = valorImcActual;
+        this.mensajeImcActual = mensajeImcActual;
+        this.estado = estado;
         this.rangoImcId = rangoImcId;
         this.usuarioId = usuarioId;
     }
@@ -75,6 +88,14 @@ public class ChequeoSalud {
         this.mensajeImcActual = mensajeImcActual;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public String getRangoImcId() {
         return rangoImcId;
     }
@@ -93,16 +114,31 @@ public class ChequeoSalud {
 
     public ContentValues toContentvalues(){
         ContentValues chequeoSaludValues = new ContentValues();
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, id);
         chequeoSaludValues.put(SaludDB.TablaChequeoSalud.FECHA_CHEQUEO, fechaChequeo);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, pesoActual);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, alturaActual);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, valorImcActual);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, mensajeImcActual);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, rangoImcId);
-        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ID_CHEQUEO, usuarioId);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.PESO_ACTUAL, pesoActual);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ALTURA_ACTUAL, alturaActual);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.VALOR_IMC_ACTUAL, valorImcActual);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.MENSAJE_IMC_ACTUAL, mensajeImcActual);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.ESTADO, estado);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.RANGOS_IMC_ID, rangoImcId);
+        chequeoSaludValues.put(SaludDB.TablaChequeoSalud.USUARIOS_ID, usuarioId);
 
         return chequeoSaludValues;
 
+    }
+
+    @Override
+    public String toString() {
+        return "ChequeoSalud{" +
+                "id=" + id +
+                ", fechaChequeo='" + fechaChequeo + '\'' +
+                ", pesoActual=" + pesoActual +
+                ", alturaActual=" + alturaActual +
+                ", valorImcActual=" + valorImcActual +
+                ", mensajeImcActual='" + mensajeImcActual + '\'' +
+                ", estado='" + estado + '\'' +
+                ", rangoImcId='" + rangoImcId + '\'' +
+                ", usuarioId='" + usuarioId + '\'' +
+                '}';
     }
 }

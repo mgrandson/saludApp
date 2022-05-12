@@ -3,6 +3,9 @@ package control;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import entidades.Deporte;
+import entidades.RegistroDietaDiaria;
+
 public class ControladorRegistroDietaDiaria {
     private SaludSqliteHelper saludSqliteHelper;
     private SQLiteDatabase instanciaBD;
@@ -26,5 +29,16 @@ public class ControladorRegistroDietaDiaria {
 
     public void cerrarDB(){
         instanciaBD.close();
+    }
+
+    //CRUD
+
+    public long crear(RegistroDietaDiaria dietaDiaria){
+        Long resultado = abrirDB().insert(
+                SaludDB.TablaRegistroDietaDiaria.NOMBRE_TABLA,
+                null, dietaDiaria.toContentvalues()
+        );
+        cerrarDB();
+        return resultado;
     }
 }

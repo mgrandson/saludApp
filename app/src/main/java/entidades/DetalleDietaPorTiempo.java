@@ -20,6 +20,12 @@ public class DetalleDietaPorTiempo {
         this.tipoComidaId = tipoComidaId;
     }
 
+    public DetalleDietaPorTiempo(String tiempoComida, int registroDietaDiariaId, int tipoComidaId) {
+        this.tiempoComida = tiempoComida;
+        this.registroDietaDiariaId = registroDietaDiariaId;
+        this.tipoComidaId = tipoComidaId;
+    }
+
     public int getId() {
         return id;
     }
@@ -54,10 +60,19 @@ public class DetalleDietaPorTiempo {
 
     public ContentValues toContentvalues(){
         ContentValues valoresEntidad = new ContentValues();
-        valoresEntidad.put(SaludDB.TablaDetalleDietaPorTiempo.ID, id);
         valoresEntidad.put(SaludDB.TablaDetalleDietaPorTiempo.TIEMPO_COMIDA, tiempoComida);
         valoresEntidad.put(SaludDB.TablaDetalleDietaPorTiempo.REGISTRO_DIETA_DIARIA_ID, registroDietaDiariaId);
         valoresEntidad.put(SaludDB.TablaDetalleDietaPorTiempo.TIPO_COMIDA_ID, tipoComidaId);
         return valoresEntidad;
+    }
+
+    @Override
+    public String toString() {
+        return "DetalleDietaPorTiempo{" +
+                "id=" + id +
+                ", tiempoComida='" + tiempoComida + '\'' +
+                ", registroDietaDiariaId=" + registroDietaDiariaId +
+                ", tipoComidaId=" + tipoComidaId +
+                '}';
     }
 }
