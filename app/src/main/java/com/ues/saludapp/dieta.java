@@ -89,8 +89,8 @@ public class dieta extends Fragment {
         double cantidadTipo;
         String estado = "P";
 
-        //chequeoSaludList = controladorChequeoSalud.obtenerRegistros();
-       /* if(chequeoSalud != null){
+        //chequeoSalud = controladorChequeoSalud.consultarPorId(1);
+        /*if(chequeoSalud != null){
            idChequeo = chequeoSalud.getId();
         }*/
 
@@ -98,39 +98,49 @@ public class dieta extends Fragment {
         idDieta = dietaAlimenticia.getId();
         registroDietaDiariaList = controladorRegistroDietaDiaria.obtenerRegistroDieta(idDieta);
 
-        for (int i = 0; i <= dietaAlimenticiaList.size() ; i++) {
-            idRegistroDia = registroDietaDiariaList.get(i).getDiaSemanaId();
-            idRegistro = registroDietaDiariaList.get(i).getId();
+        for (RegistroDietaDiaria dietas: registroDietaDiariaList) {
+            idRegistroDia = dietas.getDiaSemanaId();
+            idRegistro = dietas.getId();
             if(idRegistroDia == diaSemana){
                 detalleDietaPorTiempoList = controladorDetalleDietaPorTiempo.obtenerDetallesDietaPorTiempos(idRegistro);
             }
         }
 
-        for (int i = 0; i <= detalleDietaPorTiempoList.size()-1 ; i++) {
-            idTipoComida = detalleDietaPorTiempoList.get(i).getTipoComidaId();
-            idTiempoComida = detalleDietaPorTiempoList.get(i).getTiempoComida();
-            tipoComida = controladorTipoComida.obtenerTipoComidaId(idTipoComida);
+        if(detalleDietaPorTiempoList.size() > 0){
+            for (DetalleDietaPorTiempo detalles: detalleDietaPorTiempoList) {
+                idTipoComida = detalles.getTipoComidaId();
+                idTiempoComida = detalles.getTiempoComida();
+                tipoComida = controladorTipoComida.obtenerTipoComidaId(idTipoComida);
 
-            nombreTipoComida = tipoComida.getNombreTipoComida();
-            cantidadTipo = tipoComida.getCantidadCalorifica();
-            porcionTipo = tipoComida.getTamanioPorcion();
-            if(idTiempoComida.equals("Desayuno"))
-            {
-                comida1="Comida: "+nombreTipoComida+"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
-                desayuno = desayuno + comida1;
+                nombreTipoComida = tipoComida.getNombreTipoComida();
+                cantidadTipo = tipoComida.getCantidadCalorifica();
+                porcionTipo = tipoComida.getTamanioPorcion();
+                if(idTiempoComida.equals("Desayuno"))
+                {
+                    comida1="Comida: "+nombreTipoComida+"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
+                    desayuno = desayuno + comida1;
+                }
+                else if(idTiempoComida.equals("Almuerzo")){
+                    comida2 = "Comida: "+ nombreTipoComida  +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
+                    almuerzo = almuerzo+comida2;
+                }
+                else if(idTiempoComida.equals("Cena")){
+                    comida3 = "Comida: "+ nombreTipoComida +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
+                    cena = cena + comida3;
+                }
             }
-            else if(idTiempoComida.equals("Almuerzo")){
-                comida2 = "Comida: "+ nombreTipoComida  +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
-                almuerzo = almuerzo+comida2;
-            }
-            else if(idTiempoComida.equals("Cena")){
-                comida3 = "Comida: "+ nombreTipoComida +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
-            }
+
+            txtDesayuno.setText(desayuno);
+            txtAlmuerzo.setText(almuerzo);
+            txtCena.setText(cena);
+        }
+        else
+        {
+            txtDesayuno.setText(desayuno);
+            txtAlmuerzo.setText(almuerzo);
+            txtCena.setText(cena);
         }
 
-        txtDesayuno.setText(desayuno);
-        txtAlmuerzo.setText(almuerzo);
-        txtCena.setText(cena);
     }
 
     @Override
