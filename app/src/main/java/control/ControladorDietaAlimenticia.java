@@ -160,7 +160,7 @@ public class ControladorDietaAlimenticia {
         Cursor cursor = instanciaBD.query(
                 SaludDB.TablaDietaAlimenticia.NOMBRE_TABLA,
                 camposDietaAlimenticia,
-                "id = " + idDieta,
+                "chequeoSaludId = " + idDieta,
                 null,
                 null,
                 null,

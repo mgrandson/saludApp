@@ -47,13 +47,13 @@ public class ControladorRegistroDietaDiaria {
         return resultado;
     }
 
-    public List<RegistroDietaDiaria> obtenerRegistroDieta(int idDietaAlimenticia,int dia){
+    public List<RegistroDietaDiaria> obtenerRegistroDieta(int idDietaAlimenticia){
         List<RegistroDietaDiaria> registroDietaDiariaList = new ArrayList<>();
         abrirDB();
         Cursor cursor = instanciaBD.query(
                 SaludDB.TablaRegistroDietaDiaria.NOMBRE_TABLA,
                 null,
-                "diaSemanaId = " + dia + "and dietaAlimenticiaId =" +idDietaAlimenticia,
+                "dietaAlimenticiaId = " + idDietaAlimenticia,
                 null,
                 null,
                 null,
@@ -73,13 +73,13 @@ public class ControladorRegistroDietaDiaria {
         return registroDietaDiariaList;
     }
 
-    public RegistroDietaDiaria obtenerRegistroDietaDia(int idDietaAlimenticia,int dia){
+    public RegistroDietaDiaria obtenerRegistroDietaDia(int dia){
         //List<TipoComida> listaTipoComida = new ArrayList<>();
         abrirDB();
         Cursor cursor = instanciaBD.query(
-                SaludDB.TablaTipoComida.NOMBRE_TABLA,
+                SaludDB.TablaRegistroDietaDiaria.NOMBRE_TABLA,
                 camposRegistroDietaDiaria,
-                "diaSemanaId = " + dia + "and dietaAlimenticiaId =" +idDietaAlimenticia,
+                "diaSemanaId = " + dia ,
                 null,
                 null,
                 null,

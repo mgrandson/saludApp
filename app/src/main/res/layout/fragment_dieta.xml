@@ -179,7 +179,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="txtDesayuno"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="10dp"
                 tools:text="@string/txt_desayuno" />
         </TableRow>
 
@@ -200,7 +200,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="txtAlmuerzo"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="10dp"
                 tools:text="@string/txt_almuerzo" />
         </TableRow>
 
@@ -221,7 +221,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="txtCena"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="10dp"
                 tools:text="@string/txt_cena" />
         </TableRow>
     </TableLayout>

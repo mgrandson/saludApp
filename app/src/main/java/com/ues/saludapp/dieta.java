@@ -1,6 +1,10 @@
 package com.ues.saludapp;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,14 +26,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import control.ControladorChequeoSalud;
 import control.ControladorDetalleDietaPorTiempo;
 import control.ControladorDietaAlimenticia;
 import control.ControladorRegistroDietaDiaria;
 import control.ControladorTipoComida;
+import control.ControladorUsuario;
+import entidades.ChequeoSalud;
 import entidades.DetalleDietaPorTiempo;
 import entidades.DietaAlimenticia;
 import entidades.RegistroDietaDiaria;
 import entidades.TipoComida;
+import entidades.Usuario;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,19 +56,20 @@ public class dieta extends Fragment {
     TextView txtDesayuno;
     TextView txtAlmuerzo;
     TextView txtCena;
+
+    //Controladores en caso de que sea por datos guardados
     ControladorDietaAlimenticia controladorDietaAlimenticia;
     DietaAlimenticia dietaAlimenticia;
     List<DietaAlimenticia> dietaAlimenticiaList = new ArrayList<>();
     ControladorRegistroDietaDiaria controladorRegistroDietaDiaria;
-    RegistroDietaDiaria registroDietaDiaria;
     List<RegistroDietaDiaria> registroDietaDiariaList = new ArrayList<>();
     ControladorDetalleDietaPorTiempo controladorDetalleDietaPorTiempo;
-    DetalleDietaPorTiempo detalleDietaPorTiempo;
     List<DetalleDietaPorTiempo> detalleDietaPorTiempoList = new ArrayList<>();
     ControladorTipoComida controladorTipoComida;
     TipoComida tipoComida;
-    List<TipoComida> tipoComidaList = new ArrayList<>();
-
+    ControladorChequeoSalud controladorChequeoSalud;
+    ChequeoSalud chequeoSalud;
+    List<ChequeoSalud> chequeoSaludList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,32 +83,48 @@ public class dieta extends Fragment {
         String desayuno = "Desayuno:\n";
         String almuerzo = "Almuerzo:\n";
         String cena = "Cena:\n";
+        int idChequeo=1;
+        int idDieta,idRegistroDia, idRegistro,idTipoComida,porcionTipo;
+        String idTiempoComida, nombreTipoComida,comida1,comida2,comida3;
+        double cantidadTipo;
+        String estado = "P";
 
-        dietaAlimenticiaList = controladorDietaAlimenticia.obtenerDietaAlimenticia(0);
+        //chequeoSaludList = controladorChequeoSalud.obtenerRegistros();
+       /* if(chequeoSalud != null){
+           idChequeo = chequeoSalud.getId();
+        }*/
 
-        for (int i = 0; i < dietaAlimenticiaList.size() - 1; i++) {
-            registroDietaDiaria = controladorRegistroDietaDiaria.obtenerRegistroDietaDia(dietaAlimenticiaList.get(i).getId(), diaSemana);
-            detalleDietaPorTiempoList = controladorDetalleDietaPorTiempo.obtenerDetallesDietaPorTiempos(registroDietaDiaria.getId());
+        dietaAlimenticia = controladorDietaAlimenticia.obtenerDietaAlimenticiaId(idChequeo);
+        idDieta = dietaAlimenticia.getId();
+        registroDietaDiariaList = controladorRegistroDietaDiaria.obtenerRegistroDieta(idDieta);
+
+        for (int i = 0; i <= dietaAlimenticiaList.size() ; i++) {
+            idRegistroDia = registroDietaDiariaList.get(i).getDiaSemanaId();
+            idRegistro = registroDietaDiariaList.get(i).getId();
+            if(idRegistroDia == diaSemana){
+                detalleDietaPorTiempoList = controladorDetalleDietaPorTiempo.obtenerDetallesDietaPorTiempos(idRegistro);
+            }
         }
 
-        for (int i = 0; i < detalleDietaPorTiempoList.size() - 1; i++) {
-            tipoComida = controladorTipoComida.obtenerTipoComidaId(detalleDietaPorTiempoList.get(i).getTipoComidaId());
+        for (int i = 0; i <= detalleDietaPorTiempoList.size()-1 ; i++) {
+            idTipoComida = detalleDietaPorTiempoList.get(i).getTipoComidaId();
+            idTiempoComida = detalleDietaPorTiempoList.get(i).getTiempoComida();
+            tipoComida = controladorTipoComida.obtenerTipoComidaId(idTipoComida);
 
-            if(detalleDietaPorTiempoList.get(i).getTiempoComida() == "desayuno")
+            nombreTipoComida = tipoComida.getNombreTipoComida();
+            cantidadTipo = tipoComida.getCantidadCalorifica();
+            porcionTipo = tipoComida.getTamanioPorcion();
+            if(idTiempoComida.equals("Desayuno"))
             {
-                desayuno += "Comida: "+tipoComida.getNombreTipoComida()
-                         +"\nCantidad calorifica:" + tipoComida.getCantidadCalorifica()
-                         +"\nTamaño de porción: " + tipoComida.getTamanioPorcion();
+                comida1="Comida: "+nombreTipoComida+"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
+                desayuno = desayuno + comida1;
             }
-            else if(detalleDietaPorTiempoList.get(i).getTiempoComida() == "almuerzo"){
-                almuerzo += "Comida: "+tipoComida.getNombreTipoComida()
-                        +"\nCantidad calorifica:" + tipoComida.getCantidadCalorifica()
-                        +"\nTamaño de porción: " + tipoComida.getTamanioPorcion();
+            else if(idTiempoComida.equals("Almuerzo")){
+                comida2 = "Comida: "+ nombreTipoComida  +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
+                almuerzo = almuerzo+comida2;
             }
-            else if(detalleDietaPorTiempoList.get(i).getTiempoComida() == "cena"){
-                cena += "Comida: "+tipoComida.getNombreTipoComida()
-                        +"\nCantidad calorifica:" + tipoComida.getCantidadCalorifica()
-                        +"\nTamaño de porción: " + tipoComida.getTamanioPorcion();
+            else if(idTiempoComida.equals("Cena")){
+                comida3 = "Comida: "+ nombreTipoComida +"\nCantidad calorifica: " + cantidadTipo +"\nTamaño de porción: " + porcionTipo+"\n\n";
             }
         }
 
@@ -130,91 +155,92 @@ public class dieta extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
-
+        SharedPreferences datosLogin = getContext().getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+        datosLogin.getString("nombreUsuari","");
         switch (dayOfTheWeek){
             case "Monday":
-                txtDia.setText("Lunes");
-                obtenerDatos(1);
-                break;
-            case "Tuesday":
-                txtDia.setText("Martes");
+                txtDia.setText("LUNES");
                 obtenerDatos(2);
                 break;
-            case "Wednesday":
-                txtDia.setText("Miércoles");
+            case "Tuesday":
+                txtDia.setText("MARTES");
                 obtenerDatos(3);
                 break;
-            case "Thursday":
-                txtDia.setText("Jueves");
+            case "Wednesday":
+                txtDia.setText("MIERCOLES");
                 obtenerDatos(4);
                 break;
-            case "Friday":
-                txtDia.setText("Viernes");
+            case "Thursday":
+                txtDia.setText("JUEVES");
                 obtenerDatos(5);
                 break;
-            case "Saturday":
-                txtDia.setText("Sábado");
+            case "Friday":
+                txtDia.setText("VIERNES");
                 obtenerDatos(6);
                 break;
-            case "Sunday":
-                txtDia.setText("Domingo");
+            case "Saturday":
+                txtDia.setText("SABADO");
                 obtenerDatos(7);
+                break;
+            case "Sunday":
+                txtDia.setText("DOMINGO");
+                obtenerDatos(1);
                 break;
         }
 
         btnLunes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                txtDia.setText("Lunes");
-                obtenerDatos(1);
+                txtDia.setText("LUNES");
+                obtenerDatos(2);
             }
         });
 
         btnMartes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Martes");
-                obtenerDatos(2);
+                txtDia.setText("MARTES");
+                obtenerDatos(3);
             }
         });
 
         btnMiercoles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Miércoles");
-                obtenerDatos(3);
+                txtDia.setText("MIERCOLES");
+                obtenerDatos(4);
             }
         });
 
         btnJueves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Jueves");
-                obtenerDatos(4);
+                txtDia.setText("JUEVES");
+                obtenerDatos(5);
             }
         });
 
         btnViernes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Viernes");
-                obtenerDatos(5);
+                txtDia.setText("VIERNES");
+                obtenerDatos(6);
             }
         });
 
         btnSabado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Sábado");
-                obtenerDatos(6);
+                txtDia.setText("SABADO");
+                obtenerDatos(7);
             }
         });
 
         btnDomingo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                txtDia.setText("Domingo");
-                obtenerDatos(7);
+                txtDia.setText("DOMINGO");
+                obtenerDatos(1);
             }
         });
     }

@@ -155,12 +155,12 @@ public class ControladorChequeoSalud {
     //FUNCIONES ESPECIALES
 
     public ChequeoSalud consultarPorEstado(String parametro){
-        String [] estado = { parametro };
+        //String [] estado = { parametro };
         abrirDB();
         Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, camposChequeSalud,
-                "estado = ?",
-                estado,
+                "estado = "+ parametro,
+                null,
                 null,
                 null,
                 null);
