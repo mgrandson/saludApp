@@ -46,6 +46,7 @@ public class listaChekeoMedico extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        cambiarEstadoChequeosCaducados();
         listaChequeosMedicos = view.findViewById(R.id.listviewChequeoMedicos);
         controladorChequeoSalud = new ControladorChequeoSalud(getContext());
         chequeos = new ArrayList<>();
@@ -65,7 +66,7 @@ public class listaChekeoMedico extends Fragment {
                     System.out.println("DIRIGIENDO A AGREGAR CHEQUEO MEDICO...");
                 }
                 else {
-                    Navigation.findNavController(view).navigate(R.id.action_agregarChequeoMedicoFragment_to_crearRutinaEjercicioFragment);
+                    //Navigation.findNavController(view).navigate(R.id.action_agregarChequeoMedicoFragment_to_crearRutinaEjercicioFragment);
                     //MOSTRAS MENSAJE
                     CharSequence text = "Primero termine la dieta generada...";
                     int duration = Toast.LENGTH_LONG;
@@ -89,5 +90,30 @@ public class listaChekeoMedico extends Fragment {
         else{
             return false;
         }
+    }
+
+    public void cambiarEstadoChequeosCaducados(){
+        //try {
+            controladorChequeoSalud = new ControladorChequeoSalud(getContext());
+            List<ChequeoSalud> listaVencidos = controladorChequeoSalud.obtenerChequeosDietaCaducada();
+            if(listaVencidos != null){
+                for (ChequeoSalud cs: listaVencidos) {
+                    System.out.println("DIETA NO VENCIDA: ");
+                    System.out.println(cs.toString());
+                    //SE HA UTILIZADO EL ATRIBUTO MensajeImcActual PARA GUARDAR UNA VARIABLE CONTROLADORA
+                    if(cs.getMensajeImcActual() == "S"){
+                        System.out.println("DIETA VENCIDA: ");
+                        System.out.println(cs.toString());
+                        cs.setEstado("F");
+                        controladorChequeoSalud.actualizar(cs);
+                    }
+                }
+            }
+        //}
+        //catch (Exception e){
+          //  System.out.println("NO HAY CHEQUEOS CON DIETA CADUCADA: ");
+          //  System.out.println(e.toString());
+        //}
+
     }
 }

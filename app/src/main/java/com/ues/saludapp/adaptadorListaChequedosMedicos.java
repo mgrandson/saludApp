@@ -127,7 +127,10 @@ public class adaptadorListaChequedosMedicos extends BaseAdapter {
                     public void onClick(DialogInterface dialog, int which)
                     {
                         controladorChequeoSalud = new ControladorChequeoSalud(context);
-                        controladorChequeoSalud.eliminar(chequeos.get(i));
+                        chequeos.get(i).setFechaChequeo("2020-01-01");
+                        chequeos.get(i).setEstado("E");
+                        controladorChequeoSalud.actualizar(chequeos.get(i));
+                        controladorChequeoSalud.obtenerChequeosDietaCaducada();
                         chequeos.remove(i);
                         notifyDataSetChanged();
                         dialog.cancel();

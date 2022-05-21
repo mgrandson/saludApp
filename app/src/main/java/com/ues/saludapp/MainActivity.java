@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -63,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        System.out.println("IS LOGIN: "+datosLogin.getBoolean("isLogin", false));
+        if(datosLogin.getBoolean("isLogin", false)){
+            Intent intent = new Intent(getApplicationContext(),navegacion.class);
+            startActivity(intent);
+        }
 
 
     }
@@ -106,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = datosLogin.edit();
                 //El nombre de usuario siempre se guarda para mostrarlo en la app, se debe eliminar cuando el usuario cierre sesion.
                 editor.putString("nombreUsuario", usuario.getNombreUsuario());
+                editor.putBoolean("isLogin", true);
                 if(checkRecordarUsuario.isChecked()) {
                     editor.putString("contrasenia", usuario.getContrasenia());
                     editor.putBoolean("recordar",true);

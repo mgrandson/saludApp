@@ -5,10 +5,12 @@ import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +54,15 @@ public class ActividadFisicaCrearActualizarFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentActividadFisicaCrearActualizarBinding.inflate(inflater, container, false);
+
+        //ACCION CUANDO PRESIONAN EL BOTON ATRAS
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                NavHostFragment.findNavController(ActividadFisicaCrearActualizarFragment.this).navigate(R.id.action_actividadFisicaCrearActualizarFragment_to_crearRutinaEjercicioFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
 
         return binding.getRoot();
     }
@@ -158,6 +169,7 @@ public class ActividadFisicaCrearActualizarFragment extends Fragment {
                 dialogoFecha.show();
             }
         });
+
 
     }
 

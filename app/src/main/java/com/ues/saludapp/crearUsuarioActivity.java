@@ -169,6 +169,7 @@ public class crearUsuarioActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = datosLogin.edit();
                     //El nombre de usuario siempre se guarda para mostrarlo en la app, se debe eliminar cuando el usuario cierre sesion.
                     editor.putString("nombreUsuario", usuario.getNombreUsuario());
+                    editor.putBoolean("isLogin", true);
                     if(checkRecordarUsuario1.isChecked()) {
                         editor.putString("contrasenia", usuario.getContrasenia());
                         editor.putBoolean("recordar",true);

@@ -48,7 +48,7 @@ public class AgregarChequeoMedicoFragment extends Fragment {
     private FragmentChequeoMedicoAgregarBinding binding;
 
     //FECHA ACTUAL
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date(System.currentTimeMillis());
     String strFechaActual = sdf.format(date);
 

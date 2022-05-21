@@ -71,7 +71,7 @@ public class ControladorChequeoSalud {
         Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA,
                 null,
-                null,
+                "estado = 'P'",
                 null,
                 null,
                 null,
@@ -143,12 +143,12 @@ public class ControladorChequeoSalud {
 
     //ELIMINAR REGISTRO
     public long eliminar(ChequeoSalud chequeoSalud){
-        abrirDB();
         String [] id = { String.valueOf(chequeoSalud.getId()) };
         long resultado = abrirDB().delete(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, "id = ?",
                 id
         );
+        cerrarDB();
         return resultado;
     }
 
@@ -184,4 +184,40 @@ public class ControladorChequeoSalud {
         }
     }
 
+    //OBTENER CHEQUEOS CON DIETA CADUCADA
+    public List<ChequeoSalud> obtenerChequeosDietaCaducada(){
+        //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE id = '" + id + "' order by id desc";
+        List<ChequeoSalud> listaRegistros = new ArrayList<>();
+        String consultaSQL = "SELECT cs.*, " +
+                "da.duracionDieta, "+
+                "date(cs.fechaChequeo, '+' || da.duracionDieta ||  ' day', 'localtime') as fechaFinDieta, " +
+                "CASE WHEN date('now', 'localtime') > date(cs.fechaChequeo, '+' || da.duracionDieta ||  ' day', 'localtime') THEN 'S' ELSE 'N' END AS dietaCaducada " +
+                "FROM chequeos_salud cs " +
+                "JOIN dietas_alimenticias da " +
+                "ON cs.id = da.chequeoSaludId " +
+                "WHERE cs.estado = 'P' ORDER BY cs.fechaChequeo ASC;";
+        Cursor cursor = abrirDB().rawQuery(consultaSQL, null);
+        System.out.println("OBTENIENDO CHEQUEOS CON DIETA VENCIDA");
+        while (cursor.moveToNext()){
+            ChequeoSalud chequeoSalud = new ChequeoSalud(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getDouble(2),
+                    cursor.getDouble(3),
+                    cursor.getDouble(4),
+                    cursor.getString(11),
+                    cursor.getString(6),
+                    cursor.getString(7),
+                    cursor.getString(8));
+            System.out.println(""
+                    + " FECHA CHEQUEO: " + cursor.getString(1)
+                    + " DURACION DIETA: " + cursor.getString(9)
+                    + " FIN DIETA: " + cursor.getString(10)
+                    + " DIETACA CADUCADA: "+ cursor.getString(11));
+            listaRegistros.add(chequeoSalud);
+        }
+        cursor.close();
+        cerrarDB();
+        return listaRegistros;
+    }
 }

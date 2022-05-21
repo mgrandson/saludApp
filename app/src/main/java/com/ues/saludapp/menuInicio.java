@@ -1,6 +1,10 @@
 package com.ues.saludapp;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -24,6 +28,7 @@ public class menuInicio extends Fragment {
     TextView txtDieta;
     TextView txtRutinaEjercicio;
     TextView txtNombreUsuario;
+    TextView txtSalir;
 
 
 
@@ -50,8 +55,8 @@ public class menuInicio extends Fragment {
         txtRutinaEjercicio = view.findViewById(R.id.txtRutinaEjercicio);
         txtNombreUsuario = view.findViewById(R.id.txtUsuario);
         SharedPreferences datosLogin = getContext().getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
-        txtNombreUsuario.setText("¡Bienvenido! " + datosLogin.getString("nombreUsuario",""));
-
+        txtNombreUsuario.setText("¡Bienvenido " + datosLogin.getString("nombreUsuario","")+"!");
+        txtSalir = view.findViewById(R.id.txtSalir);
         txtChequeoMedico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +77,35 @@ public class menuInicio extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_menuInicio_to_crearRutinaEjercicioFragment);
+            }
+        });
+        txtSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Cerrar sesión");
+                builder.setMessage("¿Está seguro?");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences.Editor editor = datosLogin.edit();
+                        if(!datosLogin.getBoolean("recordar",false)){
+                            editor.putString("nombreUsuario", "");
+                            editor.putString("contrasenia", "");
+                        }
+                        editor.putBoolean("isLogin", false);
+                        editor.commit();
+                        startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
