@@ -2,14 +2,17 @@ package control;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import entidades.RegistroActividadFisicaDiaria;
+import entidades.Usuario;
 
 public class ControladorRegistroActividadFisicaDiaria {
     private SaludSqliteHelper saludSqliteHelper;
     private SQLiteDatabase instanciaBD;
     private Context context;
+    private SharedPreferences datosLogin;
 
     private static final String[] camposRegistroActividadFisicaDiaria = {
             SaludDB.TablaRegistroActividadFisicaDiaria.ID,
@@ -85,7 +88,6 @@ public class ControladorRegistroActividadFisicaDiaria {
 
     public Cursor getObtenerActividad(String id) {
         //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE id = '" + id + "' order by id desc";
-
         String consultaSQL = "" +
                 "SELECT " +
                 "afd.id, " +
@@ -105,6 +107,7 @@ public class ControladorRegistroActividadFisicaDiaria {
 
     public Cursor getObtenerActvidadActual() {
         //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE date(fechaActividad) = date('now', 'localtime') order by id desc";
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         String consultaSQL = "" +
                 "SELECT " +
                 "afd.id, " +
@@ -114,7 +117,10 @@ public class ControladorRegistroActividadFisicaDiaria {
                 "FROM registros_actividad_fisica_diaria afd " +
                 "join detalles_deportes_x_factor ddf on ddf.id = afd.detalleDeportePorFactorId " +
                 "join deportes d on d.id = ddf.deporteId " +
-                "WHERE date(afd.fechaActividad) = date('now', 'localtime') order by afd.id desc;";
+                "join chequeos_salud cs on cs.id = afd.chequeoSaludId " +
+                "WHERE date(afd.fechaActividad) = date('now', 'localtime') " +
+                "AND cs.usuariosId = "+idUsuario+" "+
+                "order by afd.id desc;";
 
         Cursor res = abrirDB().rawQuery(consultaSQL, null);
         return res;
@@ -123,6 +129,7 @@ public class ControladorRegistroActividadFisicaDiaria {
 
     public Cursor getObtenerActvidadSiguiente() {
         //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE date(fechaActividad) = date('now', '+1 day', 'localtime')  order by id desc";
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         String consultaSQL = "" +
                 "SELECT " +
                 "afd.id, " +
@@ -132,7 +139,10 @@ public class ControladorRegistroActividadFisicaDiaria {
                 "FROM registros_actividad_fisica_diaria afd " +
                 "join detalles_deportes_x_factor ddf on ddf.id = afd.detalleDeportePorFactorId " +
                 "join deportes d on d.id = ddf.deporteId " +
-                "WHERE date(afd.fechaActividad) = date('now', '+1 day', 'localtime') order by afd.id desc;";
+                "join chequeos_salud cs on cs.id = afd.chequeoSaludId " +
+                "WHERE date(afd.fechaActividad) = date('now', '+1 day', 'localtime') " +
+                "AND cs.usuariosId = "+idUsuario+" "+
+                "order by afd.id desc;";
 
         Cursor res = abrirDB().rawQuery(consultaSQL, null);
         return res;
@@ -142,6 +152,7 @@ public class ControladorRegistroActividadFisicaDiaria {
 
     public Cursor getObtenerActividadFisicaFutura() {
         //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE date(fechaActividad) > date('now', '+1 day', 'localtime') order by id desc";
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         String consultaSQL = "" +
                 "SELECT " +
                 "afd.id, " +
@@ -151,7 +162,10 @@ public class ControladorRegistroActividadFisicaDiaria {
                 "FROM registros_actividad_fisica_diaria afd " +
                 "join detalles_deportes_x_factor ddf on ddf.id = afd.detalleDeportePorFactorId " +
                 "join deportes d on d.id = ddf.deporteId " +
-                "WHERE date(afd.fechaActividad) > date('now', '+1 day', 'localtime') order by afd.id desc;";
+                "join chequeos_salud cs on cs.id = afd.chequeoSaludId " +
+                "WHERE date(afd.fechaActividad) > date('now', '+1 day', 'localtime') " +
+                "AND cs.usuariosId = "+idUsuario+" "+
+                "order by afd.id desc;";
         Cursor res = abrirDB().rawQuery(consultaSQL, null);
         return res;
     }
@@ -166,5 +180,22 @@ public class ControladorRegistroActividadFisicaDiaria {
                 "WHERE factorActividadId = "+factorActividad+";";
         Cursor res = abrirDB().rawQuery(consultaSQL, null);
         return res;
+    }
+
+    public String obtenerIdUsuarioSesionActiva(){
+        //OBTENER ID USUARIO
+        datosLogin = context.getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+        String nombreUsuario = datosLogin.getString("nombreUsuario","");
+        String consultaSQL = "SELECT * FROM usuario u where u.nombreUsuario = '"+nombreUsuario+"';";
+        Cursor cUsuario = abrirDB().rawQuery(consultaSQL, null);
+        Usuario usuario = null;
+        if(cUsuario.moveToFirst()){
+            usuario = new Usuario();
+            usuario.setNombreUsuario(String.valueOf(cUsuario.getInt(0)));
+            cUsuario.close();
+            cerrarDB();
+        }
+        System.out.println("USUARIO ID SESION ACTUAL: "+usuario.getNombreUsuario());
+        return usuario.getNombreUsuario();
     }
 }

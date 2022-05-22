@@ -1,6 +1,7 @@
 package control;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,11 +19,13 @@ import entidades.Deporte;
 import entidades.DetalleDietaPorTiempo;
 import entidades.DietaAlimenticia;
 import entidades.RegistroDietaDiaria;
+import entidades.Usuario;
 
 public class ControladorChequeoSalud {
     private SaludSqliteHelper saludSqliteHelper;
     private SQLiteDatabase instanciaBD;
     private Context context;
+    private SharedPreferences datosLogin;
 
     private static final String[] camposChequeSalud = {
             SaludDB.TablaChequeoSalud.ID_CHEQUEO,
@@ -68,10 +71,11 @@ public class ControladorChequeoSalud {
     //OBTENER TODOS LOS REGISTROS
     public List<ChequeoSalud> obtenerRegistros(){
         List<ChequeoSalud> listaRegistros = new ArrayList<>();
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA,
                 null,
-                "estado = 'P'",
+                "estado = 'P' AND usuariosId = "+idUsuario,
                 null,
                 null,
                 null,
@@ -156,10 +160,10 @@ public class ControladorChequeoSalud {
 
     public ChequeoSalud consultarPorEstado(String parametro){
         String [] estado = { parametro };
-        abrirDB();
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         Cursor cursor = abrirDB().query(
                 SaludDB.TablaChequeoSalud.NOMBRE_TABLA, camposChequeSalud,
-                "estado = ?",
+                "estado = ? AND usuariosId = "+idUsuario,
                 estado,
                 null,
                 null,
@@ -188,6 +192,7 @@ public class ControladorChequeoSalud {
     public List<ChequeoSalud> obtenerChequeosDietaCaducada(){
         //String consultaSQL = "select * from " + SaludDB.TablaRegistroActividadFisicaDiaria.NOMBRE_TABLA + " WHERE id = '" + id + "' order by id desc";
         List<ChequeoSalud> listaRegistros = new ArrayList<>();
+        String idUsuario = obtenerIdUsuarioSesionActiva();
         String consultaSQL = "SELECT cs.*, " +
                 "da.duracionDieta, "+
                 "date(cs.fechaChequeo, '+' || da.duracionDieta ||  ' day', 'localtime') as fechaFinDieta, " +
@@ -195,7 +200,7 @@ public class ControladorChequeoSalud {
                 "FROM chequeos_salud cs " +
                 "JOIN dietas_alimenticias da " +
                 "ON cs.id = da.chequeoSaludId " +
-                "WHERE cs.estado = 'P' ORDER BY cs.fechaChequeo ASC;";
+                "WHERE cs.estado = 'P' AND cs.usuariosId = "+idUsuario+" ORDER BY cs.fechaChequeo ASC;";
         Cursor cursor = abrirDB().rawQuery(consultaSQL, null);
         System.out.println("OBTENIENDO CHEQUEOS CON DIETA VENCIDA");
         while (cursor.moveToNext()){
@@ -219,5 +224,22 @@ public class ControladorChequeoSalud {
         cursor.close();
         cerrarDB();
         return listaRegistros;
+    }
+
+    public String obtenerIdUsuarioSesionActiva(){
+        //OBTENER ID USUARIO
+        datosLogin = context.getSharedPreferences("datosLogin", Context.MODE_PRIVATE);
+        String nombreUsuario = datosLogin.getString("nombreUsuario","");
+        String consultaSQL = "SELECT * FROM usuario u where u.nombreUsuario = '"+nombreUsuario+"';";
+        Cursor cUsuario = abrirDB().rawQuery(consultaSQL, null);
+        Usuario usuario = null;
+        if(cUsuario.moveToFirst()){
+            usuario = new Usuario();
+            usuario.setNombreUsuario(String.valueOf(cUsuario.getInt(0)));
+            cUsuario.close();
+            cerrarDB();
+        }
+        System.out.println("USUARIO ID SESION ACTUAL: "+usuario.getNombreUsuario());
+        return usuario.getNombreUsuario();
     }
 }

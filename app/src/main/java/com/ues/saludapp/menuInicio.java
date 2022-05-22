@@ -8,15 +8,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ues.saludapp.actividadFisica.ActividadFisicaFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,11 +36,7 @@ public class menuInicio extends Fragment {
     TextView txtRutinaEjercicio;
     TextView txtNombreUsuario;
     TextView txtSalir;
-
-
-
-
-
+    private long tiempoEspera;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +67,6 @@ public class menuInicio extends Fragment {
             }
         });
 
-
         txtDieta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,13 +74,13 @@ public class menuInicio extends Fragment {
             }
         });
 
-
         txtRutinaEjercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_menuInicio_to_crearRutinaEjercicioFragment);
             }
         });
+
         txtSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +97,8 @@ public class menuInicio extends Fragment {
                         }
                         editor.putBoolean("isLogin", false);
                         editor.commit();
+                        cerrarFragmentActual();
+                        //VOLVER A LA ACTIVIDAD DE LOGIN
                         startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
                     }
                 });
@@ -109,5 +113,24 @@ public class menuInicio extends Fragment {
             }
         });
 
+        //ACCION CUANDO PRESIONAN EL BOTON ATRAS
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (tiempoEspera + 2000 > System.currentTimeMillis()) {
+                    cerrarFragmentActual();
+                } else {
+                    Toast.makeText(getContext(), "Presione de nuevo para salir.", Toast.LENGTH_SHORT).show();
+                }
+                tiempoEspera = System.currentTimeMillis();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
+    }
+
+    public void cerrarFragmentActual(){
+        //QUITAR EL FRAGMENT PARA QUE NO VUELVA APARECER CUANDO PRESIONEN EL BOTON BACK
+        getActivity().moveTaskToBack(true);
+        getActivity().finish();
     }
 }

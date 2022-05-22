@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.ues.saludapp.R;
 import com.ues.saludapp.databinding.FragmentActividadFisicaBinding;
@@ -21,10 +22,12 @@ import com.ues.saludapp.databinding.FragmentActividadFisicaBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import control.ControladorChequeoSalud;
 import control.ControladorRegistroActividadFisicaDiaria;
+import entidades.ChequeoSalud;
 
 public class ActividadFisicaFragment extends Fragment {
-    private FragmentActividadFisicaBinding  binding;
+    private FragmentActividadFisicaBinding binding;
 
 
     ControladorRegistroActividadFisicaDiaria cActividadFisica; //DBHelper mydb;
@@ -55,14 +58,25 @@ public class ActividadFisicaFragment extends Fragment {
         binding.btnAgregarActividad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_crearRutinaEjercicioFragment_to_actividadFisicaCrearActualizarFragment);
+                //COMPROBAR SI HAY CHEQUEO PENDIENTE
+                if(existeChequeoActivo()){
+                    Navigation.findNavController(view).navigate(R.id.action_crearRutinaEjercicioFragment_to_actividadFisicaCrearActualizarFragment);
+                }
+                else{
+                    Toast.makeText(getContext(), "Primero genere un chequeo de salud", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_crearRutinaEjercicioFragment_to_actividadFisicaCrearActualizarFragment);
+                //COMPROBAR SI HAY CHEQUEO PENDIENTE
+                if(existeChequeoActivo()){
+                    Navigation.findNavController(view).navigate(R.id.action_crearRutinaEjercicioFragment_to_actividadFisicaCrearActualizarFragment);
+                }
+                else{
+                    Toast.makeText(getContext(), "Primero genere un chequeo de salud", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -168,5 +182,19 @@ public class ActividadFisicaFragment extends Fragment {
             }
         });
 
+    }
+
+    public boolean existeChequeoActivo(){
+        ControladorChequeoSalud cChequeoSalud = new ControladorChequeoSalud(this.getContext());
+        ChequeoSalud rcs;
+        rcs = cChequeoSalud.consultarPorEstado("P");
+
+        if(rcs != null){
+            System.out.println("ID CHEQUEO: "+rcs.getId()+ " ESTADO: "+rcs.getEstado()+ " FECHA: "+rcs.getFechaChequeo());
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
