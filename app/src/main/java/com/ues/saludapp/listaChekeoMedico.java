@@ -2,10 +2,12 @@ package com.ues.saludapp;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.ues.saludapp.actividadFisica.ActividadFisicaCrearActualizarFragment;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -39,6 +43,14 @@ public class listaChekeoMedico extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //ACCION CUANDO PRESIONAN EL BOTON ATRAS
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                NavHostFragment.findNavController(listaChekeoMedico.this).navigate(R.id.action_listaChekeoMedico_to_menuInicio);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(callback);
         return inflater.inflate(R.layout.fragment_lista_chekeo_medico, container, false);
     }
 
