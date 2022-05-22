@@ -1,12 +1,15 @@
 package control;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import entidades.Deporte;
 import entidades.DetalleDietaPorTiempo;
@@ -122,5 +125,62 @@ public class ControladorDietaAlimenticia {
             System.out.println("\n==========================================================================");
         }
         cerrarDB();
+    }
+
+    public List<DietaAlimenticia> obtenerDietaAlimenticia(int chequeo){
+        List<DietaAlimenticia> dietaAlimenticiaList = new ArrayList<>();
+        abrirDB();
+        Cursor cursor = instanciaBD.query(
+                SaludDB.TablaDietaAlimenticia.NOMBRE_TABLA,
+                null,
+                "chequeoSaludId = " + chequeo,
+                null,
+                null,
+                null,
+                SaludDB.TablaDietaAlimenticia.ID
+        );
+        while (cursor.moveToNext())
+        {
+            DietaAlimenticia dietaAlimenticia = new DietaAlimenticia(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getDouble(2),
+                    cursor.getInt(3)
+            );
+            dietaAlimenticiaList.add(dietaAlimenticia);
+        }
+        cursor.close();
+        cerrarDB();
+        return dietaAlimenticiaList;
+    }
+
+    public DietaAlimenticia obtenerDietaAlimenticiaId(int idDieta){
+        //List<TipoComida> listaTipoComida = new ArrayList<>();
+        abrirDB();
+        Cursor cursor = instanciaBD.query(
+                SaludDB.TablaDietaAlimenticia.NOMBRE_TABLA,
+                camposDietaAlimenticia,
+                "chequeoSaludId = " + idDieta,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst())
+        {
+            DietaAlimenticia dietaAlimenticia = new DietaAlimenticia(
+                    cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getDouble(2),
+                    cursor.getInt(3)
+            );
+            cursor.close();
+            cerrarDB();
+            return dietaAlimenticia;
+        }
+        else
+        {
+            return  null;
+        }
     }
 }
